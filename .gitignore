@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+.eslintcache
+*-lock.*
+*.lock
+*.log
+
+.env
+
+*.gbc.xml
+*.xml
+*.tar.gz
+
+/dist
+/types
+/coverage

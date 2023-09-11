@@ -1,15 +1,7 @@
-// import { toChunkArray } from "./utils/hashMapFunctions";
-// import { strain } from "./utils/getSubtypes";
-// import getProteins from './utils/getProteinsINSD';
-// import { getSubtypes, getRefseqs } from './utils/getSubtypes';
-("use strict");
-import dotenv from "dotenv";
 import cronController from "./controllers/cronController";
 import { server } from "./http";
 import "./websocket";
 import Routes from "./routes";
-
-dotenv.config();
 
 const port: number = parseInt(process.env.SV_PORT as string) || 4242;
 

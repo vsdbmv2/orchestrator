@@ -1,0 +1,4 @@
+[install.scopes]
+
+# registry with token
+"@vsdbmv2" = { token = "$NPM_TOKEN", url = "https://npm.pkg.github.com/" }

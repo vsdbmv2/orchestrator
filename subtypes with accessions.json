@@ -1,0 +1,2537 @@
+{
+  "31647": {
+    "name": "Hepatitis C virus subtype 1b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31647&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31647,
+    "accessions": [
+      {
+        "accession": "GCA_031105965.1",
+        "current_accession": "GCA_031105965.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31647, "organism_name": "Hepatitis C virus subtype 1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3110596v1",
+          "assembly_type": "haploid",
+          "release_date": "2010-09-27"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9646",
+          "total_ungapped_length": "9646",
+          "number_of_contigs": 1,
+          "contig_n50": 9646,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9646,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5623",
+          "gc_percent": 58
+        }
+      },
+      {
+        "accession": "GCA_003105485.1",
+        "current_accession": "GCA_003105485.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31647, "organism_name": "Hepatitis C virus subtype 1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310548v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-12-29"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9442",
+          "total_ungapped_length": "9442",
+          "number_of_contigs": 1,
+          "contig_n50": 9442,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9442,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5492",
+          "gc_percent": 58
+        }
+      },
+      {
+        "accession": "GCA_003105465.1",
+        "current_accession": "GCA_003105465.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31647, "organism_name": "Hepatitis C virus subtype 1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310546v1",
+          "assembly_type": "haploid",
+          "release_date": "1993-08-02"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9416",
+          "total_ungapped_length": "9416",
+          "number_of_contigs": 1,
+          "contig_n50": 9416,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9416,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5504",
+          "gc_percent": 58
+        }
+      },
+      {
+        "accession": "GCA_003105505.1",
+        "current_accession": "GCA_003105505.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31647, "organism_name": "Hepatitis C virus subtype 1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310550v1",
+          "assembly_type": "haploid",
+          "release_date": "2008-11-13"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9413",
+          "total_ungapped_length": "9413",
+          "number_of_contigs": 1,
+          "contig_n50": 9413,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9413,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5547",
+          "gc_percent": 58.5
+        }
+      },
+      {
+        "accession": "GCA_003105525.1",
+        "current_accession": "GCA_003105525.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31647, "organism_name": "Hepatitis C virus subtype 1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310552v1",
+          "assembly_type": "haploid",
+          "release_date": "2008-11-13"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9359",
+          "total_ungapped_length": "9359",
+          "number_of_contigs": 1,
+          "contig_n50": 9359,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9359,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5533",
+          "gc_percent": 59
+        }
+      }
+    ]
+  },
+  "31648": {
+    "name": "Hepatitis C virus subtype 1c",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31648&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31648,
+    "accessions": [
+      {
+        "accession": "GCA_003108625.1",
+        "current_accession": "GCA_003108625.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31648, "organism_name": "Hepatitis C virus subtype 1c" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310862v1",
+          "assembly_type": "haploid",
+          "release_date": "2014-01-27"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9424",
+          "total_ungapped_length": "9424",
+          "number_of_contigs": 1,
+          "contig_n50": 9424,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9424,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5479",
+          "gc_percent": 58
+        }
+      }
+    ]
+  },
+  "31649": {
+    "name": "Hepatitis C virus subtype 2a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31649&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31649,
+    "accessions": [
+      {
+        "accession": "GCA_000871165.1",
+        "current_accession": "GCA_000871165.1",
+        "paired_accession": "GCF_000871165.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": {
+          "tax_id": 31649,
+          "organism_name": "Hepatitis C virus subtype 2a",
+          "infraspecific_names": { "strain": "HC-J6CH" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCF_000871165.1", "status": "current", "annotation_name": "NCBI RefSeq" },
+          "assembly_name": "ViralProj20937",
+          "assembly_type": "haploid",
+          "release_date": "1999-10-05"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9711",
+          "total_ungapped_length": "9711",
+          "number_of_contigs": 1,
+          "contig_n50": 9711,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9711,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5521",
+          "gc_percent": 56.5
+        }
+      },
+      {
+        "accession": "GCA_003106025.1",
+        "current_accession": "GCA_003106025.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31649, "organism_name": "Hepatitis C virus subtype 2a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310602v1",
+          "assembly_type": "haploid",
+          "release_date": "2004-10-01"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9689",
+          "total_ungapped_length": "9689",
+          "number_of_contigs": 1,
+          "contig_n50": 9689,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9689,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5616",
+          "gc_percent": 57.5
+        }
+      },
+      {
+        "accession": "GCA_003106045.1",
+        "current_accession": "GCA_003106045.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31649, "organism_name": "Hepatitis C virus subtype 2a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310604v1",
+          "assembly_type": "haploid",
+          "release_date": "2011-07-08"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9392",
+          "total_ungapped_length": "9392",
+          "number_of_contigs": 1,
+          "contig_n50": 9392,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9392,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5438",
+          "gc_percent": 57.5
+        }
+      }
+    ]
+  },
+  "31650": {
+    "name": "Hepatitis C virus subtype 2b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31650&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31650,
+    "accessions": [
+      {
+        "accession": "GCA_003106085.1",
+        "current_accession": "GCA_003106085.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31650, "organism_name": "Hepatitis C virus subtype 2b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310608v1",
+          "assembly_type": "haploid",
+          "release_date": "2011-08-10"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9102",
+          "total_ungapped_length": "9102",
+          "number_of_contigs": 1,
+          "contig_n50": 9102,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9102,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5079",
+          "gc_percent": 55.5
+        }
+      },
+      {
+        "accession": "GCA_003106105.1",
+        "current_accession": "GCA_003106105.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31650, "organism_name": "Hepatitis C virus subtype 2b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310610v1",
+          "assembly_type": "haploid",
+          "release_date": "2011-08-10"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9102",
+          "total_ungapped_length": "9102",
+          "number_of_contigs": 1,
+          "contig_n50": 9102,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9102,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5077",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "31651": {
+    "name": "Hepatitis C virus subtype 2c",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31651&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31651,
+    "accessions": [
+      {
+        "accession": "GCA_031105975.1",
+        "current_accession": "GCA_031105975.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31651, "organism_name": "Hepatitis C virus subtype 2c" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3110597v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9524",
+          "total_ungapped_length": "9524",
+          "number_of_contigs": 1,
+          "contig_n50": 9524,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9524,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5572",
+          "gc_percent": 58
+        }
+      }
+    ]
+  },
+  "31653": {
+    "name": "Hepatitis C virus subtype 4a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31653&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31653,
+    "accessions": [
+      {
+        "accession": "GCA_031105985.1",
+        "current_accession": "GCA_031105985.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31653, "organism_name": "Hepatitis C virus subtype 4a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3110598v1",
+          "assembly_type": "haploid",
+          "release_date": "2019-03-19"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9703",
+          "total_ungapped_length": "9703",
+          "number_of_contigs": 1,
+          "contig_n50": 9703,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9703,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5420",
+          "gc_percent": 55.5
+        },
+        "annotation_info": {
+          "name": "INSDC Submitter",
+          "release_date": "2019-03-20",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        }
+      },
+      {
+        "accession": "GCA_003106825.1",
+        "current_accession": "GCA_003106825.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31653, "organism_name": "Hepatitis C virus subtype 4a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310682v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-03-14"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9295",
+          "total_ungapped_length": "9295",
+          "number_of_contigs": 1,
+          "contig_n50": 9295,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9295,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5230",
+          "gc_percent": 56
+        }
+      }
+    ]
+  },
+  "31654": {
+    "name": "Hepatitis C virus subtype 5a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31654&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31654
+  },
+  "31655": {
+    "name": "Hepatitis C virus subtype 6a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=31655&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 31655,
+    "accessions": [
+      {
+        "accession": "GCA_031105995.1",
+        "current_accession": "GCA_031105995.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31655, "organism_name": "Hepatitis C virus subtype 6a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3110599v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-04-21"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9361",
+          "total_ungapped_length": "9361",
+          "number_of_contigs": 1,
+          "contig_n50": 9361,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9361,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5315",
+          "gc_percent": 56.5
+        }
+      },
+      {
+        "accession": "GCA_003107545.1",
+        "current_accession": "GCA_003107545.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 31655, "organism_name": "Hepatitis C virus subtype 6a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310754v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-04-21"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9358",
+          "total_ungapped_length": "9358",
+          "number_of_contigs": 1,
+          "contig_n50": 9358,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9358,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5293",
+          "gc_percent": 56.5
+        }
+      }
+    ]
+  },
+  "33745": {
+    "name": "Hepatitis C virus genotype 4",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=33745&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 33745,
+    "accessions": [
+      {
+        "accession": "GCF_000874265.1",
+        "current_accession": "GCF_000874265.1",
+        "paired_accession": "GCA_000874265.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 33745,
+          "organism_name": "Hepatitis C virus genotype 4",
+          "infraspecific_names": { "isolate": "ED43 genotype 4A" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_000874265.1", "status": "current" },
+          "assembly_name": "ViralProj20933",
+          "assembly_type": "haploid",
+          "release_date": "2007-10-01"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9355",
+          "total_ungapped_length": "9355",
+          "number_of_contigs": 1,
+          "contig_n50": 9355,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9355,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5255",
+          "gc_percent": 56
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-05-22",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        }
+      },
+      {
+        "accession": "GCA_003106805.1",
+        "current_accession": "GCA_003106805.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 33745, "organism_name": "Hepatitis C virus genotype 4" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310680v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9337",
+          "total_ungapped_length": "9337",
+          "number_of_contigs": 1,
+          "contig_n50": 9337,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9337,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5486",
+          "gc_percent": 58.5
+        }
+      }
+    ]
+  },
+  "33746": {
+    "name": "Hepatitis C virus genotype 5",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=33746&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 33746,
+    "accessions": [
+      {
+        "accession": "GCF_000873605.1",
+        "current_accession": "GCF_000873605.1",
+        "paired_accession": "GCA_000873605.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 33746,
+          "organism_name": "Hepatitis C virus genotype 5",
+          "infraspecific_names": { "strain": "EUH1480" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_000873605.1", "status": "current" },
+          "assembly_name": "ViralProj20935",
+          "assembly_type": "haploid",
+          "release_date": "2007-10-01"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9343",
+          "total_ungapped_length": "9343",
+          "number_of_contigs": 1,
+          "contig_n50": 9343,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9343,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5334",
+          "gc_percent": 57
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-05-22",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        },
+        "type_material": { "type_label": "TYPE_ICTV_ADDITIONAL", "type_display_text": "ICTV additional isolate" }
+      }
+    ]
+  },
+  "40271": {
+    "name": "Hepatitis C virus genotype 2",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=40271&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 40271,
+    "accessions": [
+      {
+        "accession": "GCF_000871165.1",
+        "current_accession": "GCF_000871165.1",
+        "paired_accession": "GCA_000871165.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 40271,
+          "organism_name": "Hepatitis C virus genotype 2",
+          "infraspecific_names": { "strain": "HC-J6CH" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_000871165.1", "status": "current" },
+          "assembly_name": "ViralProj20937",
+          "assembly_type": "haploid",
+          "release_date": "2007-10-01"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9711",
+          "total_ungapped_length": "9711",
+          "number_of_contigs": 1,
+          "contig_n50": 9711,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9711,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5521",
+          "gc_percent": 56.5
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-05-22",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        }
+      }
+    ]
+  },
+  "40360": {
+    "name": "Hepatitis C virus subtype 1d",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=40360&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 40360
+  },
+  "40361": {
+    "name": "Hepatitis C virus subtype 2d",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=40361&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 40361
+  },
+  "41856": {
+    "name": "Hepatitis C virus genotype 1",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=41856&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 41856,
+    "accessions": [
+      {
+        "accession": "GCF_000861845.1",
+        "current_accession": "GCF_000861845.1",
+        "paired_accession": "GCA_000861845.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 41856,
+          "organism_name": "Hepatitis C virus genotype 1",
+          "infraspecific_names": { "isolate": "H77" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_000861845.1", "status": "current" },
+          "assembly_name": "ViralProj15432",
+          "assembly_type": "haploid",
+          "release_date": "2002-08-07",
+          "refseq_category": "reference genome"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9646",
+          "total_ungapped_length": "9646",
+          "number_of_contigs": 1,
+          "contig_n50": 9646,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9646,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5617",
+          "gc_percent": 58
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-07-11",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        },
+        "type_material": { "type_label": "TYPE_ICTV", "type_display_text": "ICTV species exemplar" }
+      }
+    ]
+  },
+  "42182": {
+    "name": "Hepatitis C virus genotype 6",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=42182&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 42182,
+    "accessions": [
+      {
+        "accession": "GCF_000872025.1",
+        "current_accession": "GCF_000872025.1",
+        "paired_accession": "GCA_000872025.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 42182,
+          "organism_name": "Hepatitis C virus genotype 6",
+          "infraspecific_names": { "isolate": "Th580" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_000872025.1", "status": "current" },
+          "assembly_name": "ViralProj20939",
+          "assembly_type": "haploid",
+          "release_date": "2007-10-01"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9628",
+          "total_ungapped_length": "9628",
+          "number_of_contigs": 1,
+          "contig_n50": 9628,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9628,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5333",
+          "gc_percent": 55
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-05-22",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        }
+      }
+    ]
+  },
+  "42791": {
+    "name": "Hepatitis C virus subtype 3b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=42791&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 42791
+  },
+  "42792": {
+    "name": "Hepatitis C virus subtype 3g",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=42792&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 42792,
+    "accessions": [
+      {
+        "accession": "GCA_003106665.1",
+        "current_accession": "GCA_003106665.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 42792, "organism_name": "Hepatitis C virus subtype 3g" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310666v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9353",
+          "total_ungapped_length": "9353",
+          "number_of_contigs": 1,
+          "contig_n50": 9353,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9353,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5212",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "44019": {
+    "name": "Hepatitis C virus subtype 1e",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=44019&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 44019
+  },
+  "44020": {
+    "name": "Hepatitis C virus subtype 1f",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=44020&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 44020
+  },
+  "44021": {
+    "name": "Hepatitis C virus subtype 2f",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=44021&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 44021,
+    "accessions": [
+      {
+        "accession": "GCA_003106205.1",
+        "current_accession": "GCA_003106205.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 44021, "organism_name": "Hepatitis C virus subtype 2f" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310620v1",
+          "assembly_type": "haploid",
+          "release_date": "2014-01-27"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9472",
+          "total_ungapped_length": "9472",
+          "number_of_contigs": 1,
+          "contig_n50": 9472,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9472,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5465",
+          "gc_percent": 57.5
+        }
+      },
+      {
+        "accession": "GCA_003106225.1",
+        "current_accession": "GCA_003106225.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 44021, "organism_name": "Hepatitis C virus subtype 2f" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310622v1",
+          "assembly_type": "haploid",
+          "release_date": "2014-01-27"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9470",
+          "total_ungapped_length": "9470",
+          "number_of_contigs": 1,
+          "contig_n50": 9470,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9470,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5533",
+          "gc_percent": 58.5
+        }
+      }
+    ]
+  },
+  "44022": {
+    "name": "Hepatitis C virus subtype 4c",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=44022&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 44022
+  },
+  "44023": {
+    "name": "Hepatitis C virus subtype 4f",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=44023&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 44023,
+    "accessions": [
+      {
+        "accession": "GCA_003106945.1",
+        "current_accession": "GCA_003106945.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 44023, "organism_name": "Hepatitis C virus subtype 4f" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310694v1",
+          "assembly_type": "haploid",
+          "release_date": "2007-08-27"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9304",
+          "total_ungapped_length": "9304",
+          "number_of_contigs": 1,
+          "contig_n50": 9304,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9304,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5304",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "128819": {
+    "name": "Hepatitis C virus subtype 4d",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=128819&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 128819,
+    "accessions": [
+      {
+        "accession": "GCA_003106905.1",
+        "current_accession": "GCA_003106905.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 128819, "organism_name": "Hepatitis C virus subtype 4d" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310690v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-03-14"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9273",
+          "total_ungapped_length": "9273",
+          "number_of_contigs": 1,
+          "contig_n50": 9273,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9273,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5309",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "128820": {
+    "name": "Hepatitis C virus subtype 4k",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=128820&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 128820
+  },
+  "128821": {
+    "name": "Hepatitis C virus subtype 4h",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=128821&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 128821
+  },
+  "356114": {
+    "name": "Hepatitis C virus genotype 3",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356114&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356114,
+    "accessions": [
+      {
+        "accession": "GCF_000874285.1",
+        "current_accession": "GCF_000874285.1",
+        "paired_accession": "GCA_000874285.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 356114,
+          "organism_name": "Hepatitis C virus genotype 3",
+          "infraspecific_names": { "isolate": "NZL1" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_000874285.1", "status": "current" },
+          "assembly_name": "ViralProj20941",
+          "assembly_type": "haploid",
+          "release_date": "2007-10-01"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9456",
+          "total_ungapped_length": "9456",
+          "number_of_contigs": 1,
+          "contig_n50": 9456,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9456,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5262",
+          "gc_percent": 55.5
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-05-22",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        },
+        "type_material": { "type_label": "TYPE_ICTV_ADDITIONAL", "type_display_text": "ICTV additional isolate" }
+      },
+      {
+        "accession": "GCA_031121035.1",
+        "current_accession": "GCA_031121035.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356114, "organism_name": "Hepatitis C virus genotype 3" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112103v1",
+          "assembly_type": "haploid",
+          "release_date": "2011-12-06"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9449",
+          "total_ungapped_length": "9449",
+          "number_of_contigs": 1,
+          "contig_n50": 9449,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9449,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5285",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "356115": {
+    "name": "Hepatitis C virus subtype 3k",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356115&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356115
+  },
+  "356387": {
+    "name": "Hepatitis C virus subtype 2i",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356387&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356387
+  },
+  "356426": {
+    "name": "Hepatitis C virus subtype 3a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356426&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356426,
+    "accessions": [
+      {
+        "accession": "GCA_031121045.1",
+        "current_accession": "GCA_031121045.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356426, "organism_name": "Hepatitis C virus subtype 3a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112104v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-09-05"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9654",
+          "total_ungapped_length": "9654",
+          "number_of_contigs": 1,
+          "contig_n50": 9654,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9654,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5359",
+          "gc_percent": 55.5
+        }
+      },
+      {
+        "accession": "GCA_003106545.1",
+        "current_accession": "GCA_003106545.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356426, "organism_name": "Hepatitis C virus subtype 3a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310654v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-02-09"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9429",
+          "total_ungapped_length": "9429",
+          "number_of_contigs": 1,
+          "contig_n50": 9429,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9429,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5248",
+          "gc_percent": 55.5
+        }
+      },
+      {
+        "accession": "GCA_003106525.1",
+        "current_accession": "GCA_003106525.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356426, "organism_name": "Hepatitis C virus subtype 3a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310652v1",
+          "assembly_type": "haploid",
+          "release_date": "1998-02-19"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9425",
+          "total_ungapped_length": "9425",
+          "number_of_contigs": 1,
+          "contig_n50": 9425,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9425,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5298",
+          "gc_percent": 56
+        }
+      }
+    ]
+  },
+  "356427": {
+    "name": "Hepatitis C virus subtype 6g",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356427&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356427,
+    "accessions": [
+      {
+        "accession": "GCA_003107725.1",
+        "current_accession": "GCA_003107725.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356427, "organism_name": "Hepatitis C virus subtype 6g" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310772v1",
+          "assembly_type": "haploid",
+          "release_date": "2005-12-16"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9462",
+          "total_ungapped_length": "9462",
+          "number_of_contigs": 1,
+          "contig_n50": 9462,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9462,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5308",
+          "gc_percent": 56
+        }
+      }
+    ]
+  },
+  "356465": {
+    "name": "Hepatitis C virus subtype 6b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356465&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356465
+  },
+  "356466": {
+    "name": "Hepatitis C virus subtype 2k",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356466&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356466,
+    "accessions": [
+      {
+        "accession": "GCA_003106325.1",
+        "current_accession": "GCA_003106325.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356466, "organism_name": "Hepatitis C virus subtype 2k" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310632v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9380",
+          "total_ungapped_length": "9380",
+          "number_of_contigs": 1,
+          "contig_n50": 9380,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9380,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5259",
+          "gc_percent": 56
+        }
+      }
+    ]
+  },
+  "356467": {
+    "name": "Hepatitis C virus subtype 6h",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356467&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356467
+  },
+  "356468": {
+    "name": "Hepatitis C virus subtype 6d",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356468&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356468
+  },
+  "356469": {
+    "name": "Hepatitis C virus subtype 6k",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=356469&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 356469,
+    "accessions": [
+      {
+        "accession": "GCA_003107485.1",
+        "current_accession": "GCA_003107485.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356469, "organism_name": "Hepatitis C virus subtype 6k" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310748v1",
+          "assembly_type": "haploid",
+          "release_date": "2005-11-23"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9440",
+          "total_ungapped_length": "9440",
+          "number_of_contigs": 1,
+          "contig_n50": 9440,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9440,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5272",
+          "gc_percent": 55.5
+        }
+      },
+      {
+        "accession": "GCA_003107505.1",
+        "current_accession": "GCA_003107505.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 356469, "organism_name": "Hepatitis C virus subtype 6k" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310750v1",
+          "assembly_type": "haploid",
+          "release_date": "2005-11-23"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9430",
+          "total_ungapped_length": "9430",
+          "number_of_contigs": 1,
+          "contig_n50": 9430,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9430,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5245",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "378506": {
+    "name": "Hepatitis C virus subtype 6n",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=378506&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 378506,
+    "accessions": [
+      {
+        "accession": "GCA_031121235.1",
+        "current_accession": "GCA_031121235.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 378506, "organism_name": "Hepatitis C virus subtype 6n" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112123v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9447",
+          "total_ungapped_length": "9447",
+          "number_of_contigs": 1,
+          "contig_n50": 9447,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9447,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5234",
+          "gc_percent": 55
+        }
+      },
+      {
+        "accession": "GCA_003107945.1",
+        "current_accession": "GCA_003107945.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 378506, "organism_name": "Hepatitis C virus subtype 6n" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310794v1",
+          "assembly_type": "haploid",
+          "release_date": "2005-11-23"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9441",
+          "total_ungapped_length": "9441",
+          "number_of_contigs": 1,
+          "contig_n50": 9441,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9441,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5218",
+          "gc_percent": 55
+        }
+      }
+    ]
+  },
+  "378507": {
+    "name": "Hepatitis C virus subtype 6m",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=378507&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 378507,
+    "accessions": [
+      {
+        "accession": "GCA_003107905.1",
+        "current_accession": "GCA_003107905.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 378507, "organism_name": "Hepatitis C virus subtype 6m" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310790v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9450",
+          "total_ungapped_length": "9450",
+          "number_of_contigs": 1,
+          "contig_n50": 9450,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9450,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5204",
+          "gc_percent": 55
+        }
+      },
+      {
+        "accession": "GCA_003107925.1",
+        "current_accession": "GCA_003107925.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 378507, "organism_name": "Hepatitis C virus subtype 6m" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310792v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9449",
+          "total_ungapped_length": "9449",
+          "number_of_contigs": 1,
+          "contig_n50": 9449,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9449,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5178",
+          "gc_percent": 55
+        }
+      }
+    ]
+  },
+  "413255": {
+    "name": "Hepatitis C virus subtype 6e",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=413255&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 413255,
+    "accessions": [
+      {
+        "accession": "GCA_031121475.1",
+        "current_accession": "GCA_031121475.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 413255, "organism_name": "Hepatitis C virus subtype 6e" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112147v1",
+          "assembly_type": "haploid",
+          "release_date": "2005-12-16"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9468",
+          "total_ungapped_length": "9468",
+          "number_of_contigs": 1,
+          "contig_n50": 9468,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9468,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5247",
+          "gc_percent": 55
+        }
+      }
+    ]
+  },
+  "413256": {
+    "name": "Hepatitis C virus subtype 6l",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=413256&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 413256,
+    "accessions": [
+      {
+        "accession": "GCA_003107865.1",
+        "current_accession": "GCA_003107865.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 413256, "organism_name": "Hepatitis C virus subtype 6l" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310786v1",
+          "assembly_type": "haploid",
+          "release_date": "2007-04-24"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9453",
+          "total_ungapped_length": "9453",
+          "number_of_contigs": 1,
+          "contig_n50": 9453,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9453,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5259",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "413257": {
+    "name": "Hepatitis C virus subtype 6o",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=413257&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 413257,
+    "accessions": [
+      {
+        "accession": "GCA_003107985.1",
+        "current_accession": "GCA_003107985.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 413257, "organism_name": "Hepatitis C virus subtype 6o" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310798v1",
+          "assembly_type": "haploid",
+          "release_date": "2007-04-24"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9450",
+          "total_ungapped_length": "9450",
+          "number_of_contigs": 1,
+          "contig_n50": 9450,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9450,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5367",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "438880": {
+    "name": "Hepatitis C virus subtype 6c",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=438880&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 438880,
+    "accessions": [
+      {
+        "accession": "GCA_003107585.1",
+        "current_accession": "GCA_003107585.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 438880, "organism_name": "Hepatitis C virus subtype 6c" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310758v1",
+          "assembly_type": "haploid",
+          "release_date": "2007-04-24"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9459",
+          "total_ungapped_length": "9459",
+          "number_of_contigs": 1,
+          "contig_n50": 9459,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9459,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5313",
+          "gc_percent": 56
+        }
+      }
+    ]
+  },
+  "438881": {
+    "name": "Hepatitis C virus subtype 6p",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=438881&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 438881,
+    "accessions": [
+      {
+        "accession": "GCA_003108025.1",
+        "current_accession": "GCA_003108025.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 438881, "organism_name": "Hepatitis C virus subtype 6p" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310802v1",
+          "assembly_type": "haploid",
+          "release_date": "2007-04-24"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9453",
+          "total_ungapped_length": "9453",
+          "number_of_contigs": 1,
+          "contig_n50": 9453,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9453,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5354",
+          "gc_percent": 56.5
+        }
+      }
+    ]
+  },
+  "467337": {
+    "name": "Hepatitis C virus subtype 6i",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=467337&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 467337,
+    "accessions": [
+      {
+        "accession": "GCA_003107765.1",
+        "current_accession": "GCA_003107765.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 467337, "organism_name": "Hepatitis C virus subtype 6i" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310776v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9458",
+          "total_ungapped_length": "9458",
+          "number_of_contigs": 1,
+          "contig_n50": 9458,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9458,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5294",
+          "gc_percent": 56
+        }
+      }
+    ]
+  },
+  "467338": {
+    "name": "Hepatitis C virus subtype 6j",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=467338&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 467338,
+    "accessions": [
+      {
+        "accession": "GCA_003107825.1",
+        "current_accession": "GCA_003107825.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 467338, "organism_name": "Hepatitis C virus subtype 6j" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310782v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9454",
+          "total_ungapped_length": "9454",
+          "number_of_contigs": 1,
+          "contig_n50": 9454,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9454,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5295",
+          "gc_percent": 56
+        }
+      },
+      {
+        "accession": "GCA_003107805.1",
+        "current_accession": "GCA_003107805.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 467338, "organism_name": "Hepatitis C virus subtype 6j" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310780v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9442",
+          "total_ungapped_length": "9442",
+          "number_of_contigs": 1,
+          "contig_n50": 9442,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9442,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5249",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "467339": {
+    "name": "Hepatitis C virus subtype 6q",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=467339&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 467339,
+    "accessions": [
+      {
+        "accession": "GCA_003108045.1",
+        "current_accession": "GCA_003108045.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 467339, "organism_name": "Hepatitis C virus subtype 6q" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310804v1",
+          "assembly_type": "haploid",
+          "release_date": "2007-04-24"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9463",
+          "total_ungapped_length": "9463",
+          "number_of_contigs": 1,
+          "contig_n50": 9463,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9463,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5303",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "467354": {
+    "name": "Hepatitis C virus subtype 6f",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=467354&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 467354,
+    "accessions": [
+      {
+        "accession": "GCA_003107685.1",
+        "current_accession": "GCA_003107685.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 467354, "organism_name": "Hepatitis C virus subtype 6f" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310768v1",
+          "assembly_type": "haploid",
+          "release_date": "2006-08-31"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9454",
+          "total_ungapped_length": "9454",
+          "number_of_contigs": 1,
+          "contig_n50": 9454,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9454,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5387",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "484894": {
+    "name": "Hepatitis C virus subtype 1g",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=484894&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 484894,
+    "accessions": [
+      {
+        "accession": "GCA_003117875.1",
+        "current_accession": "GCA_003117875.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 484894, "organism_name": "Hepatitis C virus subtype 1g" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM311787v1",
+          "assembly_type": "haploid",
+          "release_date": "2008-06-20"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9490",
+          "total_ungapped_length": "9490",
+          "number_of_contigs": 1,
+          "contig_n50": 9490,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9490,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5565",
+          "gc_percent": 58.5
+        }
+      }
+    ]
+  },
+  "569610": {
+    "name": "Hepatitis C virus subtype 6v",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=569610&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 569610,
+    "accessions": [
+      {
+        "accession": "GCA_003108185.1",
+        "current_accession": "GCA_003108185.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 569610, "organism_name": "Hepatitis C virus subtype 6v" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310818v1",
+          "assembly_type": "haploid",
+          "release_date": "2008-10-22"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9429",
+          "total_ungapped_length": "9429",
+          "number_of_contigs": 1,
+          "contig_n50": 9429,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9429,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5147",
+          "gc_percent": 54.5
+        }
+      }
+    ]
+  },
+  "679182": {
+    "name": "Hepatitis C virus strain M21-2k/1b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=679182&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 679182,
+    "accessions": [
+      {
+        "accession": "GCA_031124145.1",
+        "current_accession": "GCA_031124145.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 679182, "organism_name": "Hepatitis C virus strain M21-2k/1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112414v1",
+          "assembly_type": "haploid",
+          "release_date": "2009-09-22"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9398",
+          "total_ungapped_length": "9398",
+          "number_of_contigs": 1,
+          "contig_n50": 9398,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9398,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5441",
+          "gc_percent": 57.5
+        }
+      }
+    ]
+  },
+  "693426": {
+    "name": "Hepatitis C virus subtype 4n",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=693426&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 693426,
+    "accessions": [
+      {
+        "accession": "GCA_003107185.1",
+        "current_accession": "GCA_003107185.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 693426, "organism_name": "Hepatitis C virus subtype 4n" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310718v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9301",
+          "total_ungapped_length": "9301",
+          "number_of_contigs": 1,
+          "contig_n50": 9301,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9301,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5302",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "693427": {
+    "name": "Hepatitis C virus subtype 4r",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=693427&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 693427,
+    "accessions": [
+      {
+        "accession": "GCA_031124235.1",
+        "current_accession": "GCA_031124235.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 693427, "organism_name": "Hepatitis C virus subtype 4r" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112423v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9328",
+          "total_ungapped_length": "9328",
+          "number_of_contigs": 1,
+          "contig_n50": 9328,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9328,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5446",
+          "gc_percent": 58
+        }
+      },
+      {
+        "accession": "GCA_003107305.1",
+        "current_accession": "GCA_003107305.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 693427, "organism_name": "Hepatitis C virus subtype 4r" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310730v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9319",
+          "total_ungapped_length": "9319",
+          "number_of_contigs": 1,
+          "contig_n50": 9319,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9319,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5369",
+          "gc_percent": 57.5
+        }
+      }
+    ]
+  },
+  "693428": {
+    "name": "Hepatitis C virus subtype 2j",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=693428&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 693428
+  },
+  "693429": {
+    "name": "Hepatitis C virus subtype 2l",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=693429&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 693429
+  },
+  "745709": {
+    "name": "Hepatitis C virus subtype 4o",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=745709&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 745709,
+    "accessions": [
+      {
+        "accession": "GCA_003107225.1",
+        "current_accession": "GCA_003107225.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 745709, "organism_name": "Hepatitis C virus subtype 4o" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310722v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9286",
+          "total_ungapped_length": "9286",
+          "number_of_contigs": 1,
+          "contig_n50": 9286,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9286,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5310",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "760561": {
+    "name": "Hepatitis C virus subtype 2e",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=760561&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 760561
+  },
+  "1094895": {
+    "name": "Hepatitis C virus subtype 3i",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1094895&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1094895,
+    "accessions": [
+      {
+        "accession": "GCA_003106745.1",
+        "current_accession": "GCA_003106745.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094895, "organism_name": "Hepatitis C virus subtype 3i" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310674v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9352",
+          "total_ungapped_length": "9352",
+          "number_of_contigs": 1,
+          "contig_n50": 9352,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9352,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5213",
+          "gc_percent": 55.5
+        }
+      }
+    ]
+  },
+  "1094898": {
+    "name": "Hepatitis C virus subtype 4L",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1094898&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1094898,
+    "accessions": [
+      {
+        "accession": "GCA_031129665.1",
+        "current_accession": "GCA_031129665.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094898, "organism_name": "Hepatitis C virus subtype 4L" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112966v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9322",
+          "total_ungapped_length": "9322",
+          "number_of_contigs": 1,
+          "contig_n50": 9322,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9322,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5419",
+          "gc_percent": 58
+        }
+      },
+      {
+        "accession": "GCA_003107105.1",
+        "current_accession": "GCA_003107105.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094898, "organism_name": "Hepatitis C virus subtype 4L" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310710v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9317",
+          "total_ungapped_length": "9317",
+          "number_of_contigs": 1,
+          "contig_n50": 9317,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9317,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5402",
+          "gc_percent": 58
+        }
+      }
+    ]
+  },
+  "1094899": {
+    "name": "Hepatitis C virus subtype 4g",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1094899&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1094899,
+    "accessions": [
+      {
+        "accession": "GCA_003107025.1",
+        "current_accession": "GCA_003107025.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094899, "organism_name": "Hepatitis C virus subtype 4g" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310702v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9314",
+          "total_ungapped_length": "9314",
+          "number_of_contigs": 1,
+          "contig_n50": 9314,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9314,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5488",
+          "gc_percent": 58.5
+        }
+      }
+    ]
+  },
+  "1094900": {
+    "name": "Hepatitis C virus subtype 4m",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1094900&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1094900,
+    "accessions": [
+      {
+        "accession": "GCA_031129675.1",
+        "current_accession": "GCA_031129675.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094900, "organism_name": "Hepatitis C virus subtype 4m" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112967v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9310",
+          "total_ungapped_length": "9310",
+          "number_of_contigs": 1,
+          "contig_n50": 9310,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9310,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5334",
+          "gc_percent": 57
+        }
+      },
+      {
+        "accession": "GCA_003107145.1",
+        "current_accession": "GCA_003107145.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094900, "organism_name": "Hepatitis C virus subtype 4m" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310714v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9305",
+          "total_ungapped_length": "9305",
+          "number_of_contigs": 1,
+          "contig_n50": 9305,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9305,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5334",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "1094901": {
+    "name": "Hepatitis C virus subtype 2m",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1094901&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1094901,
+    "accessions": [
+      {
+        "accession": "GCA_031129685.1",
+        "current_accession": "GCA_031129685.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094901, "organism_name": "Hepatitis C virus subtype 2m" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3112968v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9389",
+          "total_ungapped_length": "9389",
+          "number_of_contigs": 1,
+          "contig_n50": 9389,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9389,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5387",
+          "gc_percent": 57
+        }
+      },
+      {
+        "accession": "GCA_003106405.1",
+        "current_accession": "GCA_003106405.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1094901, "organism_name": "Hepatitis C virus subtype 2m" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310640v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9383",
+          "total_ungapped_length": "9383",
+          "number_of_contigs": 1,
+          "contig_n50": 9383,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9383,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5385",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "1193076": {
+    "name": "Hepatitis C virus subtype 6u",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1193076&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1193076
+  },
+  "1208062": {
+    "name": "Hepatitis C virus subtype 4v",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1208062&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1208062,
+    "accessions": [
+      {
+        "accession": "GCA_003107385.1",
+        "current_accession": "GCA_003107385.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1208062, "organism_name": "Hepatitis C virus subtype 4v" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310738v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9323",
+          "total_ungapped_length": "9323",
+          "number_of_contigs": 1,
+          "contig_n50": 9323,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9323,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5353",
+          "gc_percent": 57
+        }
+      },
+      {
+        "accession": "GCA_003107405.1",
+        "current_accession": "GCA_003107405.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1208062, "organism_name": "Hepatitis C virus subtype 4v" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM310740v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9270",
+          "total_ungapped_length": "9270",
+          "number_of_contigs": 1,
+          "contig_n50": 9270,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9270,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5308",
+          "gc_percent": 57
+        }
+      }
+    ]
+  },
+  "1208063": {
+    "name": "Hepatitis C virus subtype 2k/1b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1208063&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1208063,
+    "accessions": [
+      {
+        "accession": "GCA_031136645.1",
+        "current_accession": "GCA_031136645.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1208063, "organism_name": "Hepatitis C virus subtype 2k/1b" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3113664v1",
+          "assembly_type": "haploid",
+          "release_date": "2012-07-12"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9302",
+          "total_ungapped_length": "9302",
+          "number_of_contigs": 1,
+          "contig_n50": 9302,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9302,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5420",
+          "gc_percent": 58
+        }
+      }
+    ]
+  },
+  "1405107": {
+    "name": "Hepatitis C virus subtype 3e",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1405107&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1405107
+  },
+  "1544901": {
+    "name": "Hepatitis C virus genotype 7",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1544901&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1544901,
+    "accessions": [
+      {
+        "accession": "GCF_001712785.1",
+        "current_accession": "GCF_001712785.1",
+        "paired_accession": "GCA_001712785.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": {
+          "tax_id": 1544901,
+          "organism_name": "Hepatitis C virus genotype 7",
+          "infraspecific_names": { "isolate": "QC69" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCA_001712785.1", "status": "current" },
+          "assembly_name": "ViralProj339556",
+          "assembly_type": "haploid",
+          "release_date": "2016-08-19",
+          "refseq_category": "reference genome"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9443",
+          "total_ungapped_length": "9443",
+          "number_of_contigs": 1,
+          "contig_n50": 9443,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9443,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5358",
+          "gc_percent": 56.5
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2019-05-28",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        },
+        "type_material": { "type_label": "TYPE_ICTV_ADDITIONAL", "type_display_text": "ICTV additional isolate" }
+      },
+      {
+        "accession": "GCA_031161295.1",
+        "current_accession": "GCA_031161295.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 1544901, "organism_name": "Hepatitis C virus genotype 7" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "assembly_name": "ASM3116129v1",
+          "assembly_type": "haploid",
+          "release_date": "2017-03-27"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9421",
+          "total_ungapped_length": "9421",
+          "number_of_contigs": 1,
+          "contig_n50": 9421,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9421,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5502",
+          "gc_percent": 58
+        }
+      }
+    ]
+  },
+  "1972279": {
+    "name": "Hepatitis C virus genotype 8",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1972279&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1972279
+  },
+  "1972280": {
+    "name": "Hepatitis C virus subtype 8a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=1972280&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 1972280
+  },
+  "2080447": {
+    "name": "Hepatitis C virus subtype 2b/1a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=2080447&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 2080447
+  },
+  "2491016": {
+    "name": "Hepatitis C virus subtype 6r",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=2491016&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 2491016
+  },
+  "2847144": {
+    "name": "hepatitis C virus genotype 1a",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=2847144&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 2847144,
+    "accessions": [
+      {
+        "accession": "GCA_000861845.1",
+        "current_accession": "GCA_000861845.1",
+        "paired_accession": "GCF_000861845.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": {
+          "tax_id": 2847144,
+          "organism_name": "hepatitis C virus genotype 1a",
+          "infraspecific_names": { "isolate": "H77" }
+        },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": { "accession": "GCF_000861845.1", "status": "current", "annotation_name": "NCBI RefSeq" },
+          "assembly_name": "ViralProj15432",
+          "assembly_type": "haploid",
+          "release_date": "1997-08-09"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9646",
+          "total_ungapped_length": "9646",
+          "number_of_contigs": 1,
+          "contig_n50": 9646,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9646,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5617",
+          "gc_percent": 58
+        },
+        "type_material": { "type_label": "TYPE_ICTV", "type_display_text": "ICTV species exemplar" }
+      },
+      {
+        "accession": "GCA_002820825.1",
+        "current_accession": "GCA_002820825.1",
+        "paired_accession": "GCF_002820825.1",
+        "source_database": "SOURCE_DATABASE_GENBANK",
+        "organism": { "tax_id": 2847144, "organism_name": "hepatitis C virus genotype 1a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "current",
+          "paired_assembly": {
+            "accession": "GCF_002820825.1",
+            "status": "suppressed",
+            "annotation_name": "NCBI RefSeq"
+          },
+          "assembly_name": "ASM282082v1",
+          "assembly_type": "haploid",
+          "release_date": "1993-08-02"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9401",
+          "total_ungapped_length": "9401",
+          "number_of_contigs": 1,
+          "contig_n50": 9401,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9401,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5533",
+          "gc_percent": 58.5
+        },
+        "type_material": { "type_label": "TYPE_ICTV_ADDITIONAL", "type_display_text": "ICTV additional isolate" }
+      },
+      {
+        "accession": "GCF_002820825.1",
+        "current_accession": "GCF_002820825.1",
+        "paired_accession": "GCA_002820825.1",
+        "source_database": "SOURCE_DATABASE_REFSEQ",
+        "organism": { "tax_id": 2847144, "organism_name": "hepatitis C virus genotype 1a" },
+        "assembly_info": {
+          "assembly_level": "Complete Genome",
+          "assembly_status": "suppressed",
+          "paired_assembly": { "accession": "GCA_002820825.1", "status": "current" },
+          "assembly_name": "ASM282082v1",
+          "assembly_type": "haploid",
+          "release_date": "2023-05-04"
+        },
+        "assembly_stats": {
+          "total_number_of_chromosomes": 1,
+          "total_sequence_length": "9401",
+          "total_ungapped_length": "9401",
+          "number_of_contigs": 1,
+          "contig_n50": 9401,
+          "contig_l50": 1,
+          "number_of_scaffolds": 1,
+          "scaffold_n50": 9401,
+          "scaffold_l50": 1,
+          "number_of_component_sequences": 1,
+          "gc_count": "5533",
+          "gc_percent": 58.5
+        },
+        "annotation_info": {
+          "name": "NCBI RefSeq",
+          "release_date": "2023-05-04",
+          "stats": { "gene_counts": { "total": 1, "protein_coding": 1 } }
+        }
+      }
+    ]
+  },
+  "2847145": {
+    "name": "hepatitis C virus genotype 1b",
+    "url": "/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=2847145&lvl=3&lin=f&keep=1&srchmode=1&unlock",
+    "ncbi_id": 2847145
+  }
+}

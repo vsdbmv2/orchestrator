@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
 import Knex from "knex";
-
-dotenv.config();
 
 const knex = Knex({
 	client: "mysql2",

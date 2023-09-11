@@ -5,19 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ts-node",
-      "type": "node",
+      "name": "debug with bun",
+      "type": "bun",
+      "runtime": "bun",
       "request": "launch",
       "args": [
         "${relativeFile}"
       ],
       "runtimeArgs": [
-        "-r",
-        "ts-node/register"
+        "--inspect",
       ],
       "cwd": "${workspaceRoot}",
       "protocol": "inspector",
-      "program": "${workspaceFolder}/src/server.ts",
       "internalConsoleOptions": "openOnSessionStart"
     }
   ]

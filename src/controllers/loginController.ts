@@ -1,9 +1,7 @@
 import { Request, Response } from "restify";
-import dotenv from "dotenv";
 import knex from "../services/database";
 import jwt from "jsonwebtoken";
 import sha1 from "sha1";
-dotenv.config();
 
 // import email from "../utils/mailgunEmailController";
 

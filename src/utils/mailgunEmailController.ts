@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
 import Mailgun from "mailgun-js";
-
-dotenv.config();
 
 type mailgunEmailController = {
 	sendEmail: (recipient: string, subject: string, body: string) => Promise<Mailgun.messages.SendResponse>;

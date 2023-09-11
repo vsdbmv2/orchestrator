@@ -1,6 +1,4 @@
 import { Request, Response } from "restify";
-import dotenv from "dotenv";
-dotenv.config();
 
 import { IVirus, IUser, IFeatureQualifier } from "../@types";
 import knex from "../services/database";

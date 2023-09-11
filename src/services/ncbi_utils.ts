@@ -1,11 +1,8 @@
-import dotenv from "dotenv";
 import axios from "axios";
 import { xml2json } from "xml-js";
 // import { transform } from 'camaro';
 import { IViralSequence } from "../@types";
 import { IINSDSeq } from "../@types/Sequence.interface";
-
-dotenv.config();
 
 const { eSearchUrl, eFetchUrl, apiKey } = process.env;
 

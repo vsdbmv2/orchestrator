@@ -1,8 +1,5 @@
 import { Request, Response } from "restify";
-import dotenv from "dotenv";
 import knex from "../services/database";
-
-dotenv.config();
 
 export default {
 	async getCount(req: Request, res: Response) {

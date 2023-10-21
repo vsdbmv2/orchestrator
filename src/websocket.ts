@@ -46,7 +46,7 @@ io.on("connection", (socket: Socket) => {
 
 	socket.on("disconnect", () => {
 		socketControl.clients--;
-		console.log("socket disconected, id", socket.id);
+		console.log("socket disconnected, id", socket.id);
 		taskManager.deallocateWork(socket.id);
 		clientsWorking = clientsWorking.filter((e) => e !== socket.id);
 		clearInterval(pong);

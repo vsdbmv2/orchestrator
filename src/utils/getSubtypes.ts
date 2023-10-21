@@ -11,7 +11,7 @@ const getPage = async (ncbi_id: number | string) => {
 	return new JSDOM(data).window.document;
 };
 
-export const getRefseqs = async (ncbi_ids: string[] | number[]): { [key: string]: Array<{}> } => {
+export const getRefseqs = async (ncbi_ids: string[] | number[]): Promise<{ [key: string]: Array<{}> }> => {
 	let filters = "/dataset_report?";
 	filters += "filters.assembly_level=complete_genome";
 	filters += "&table_fields=assminfo-accession&table_fields=assminfo-name";

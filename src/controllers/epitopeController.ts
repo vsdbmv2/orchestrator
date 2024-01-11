@@ -1,4 +1,4 @@
-import { Request, Response } from "restify";
+import { Request, Response } from "express";
 import { IVirus, IAssay } from "../@types";
 import knex from "../services/database";
 import { hashObjectBy } from "../utils/hashMapFunctions";

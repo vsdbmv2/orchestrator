@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `viral_model`.`sequence` (
   `locus` TEXT NULL,
   `definition` TEXT NULL,
   `size` INT NULL,
-  `gi` INT NULL,
+  `gi` VARCHAR(20) NULL,
   `moltype` TEXT NULL,
   `topology` TEXT NULL,
   `taxonomy` TEXT NULL,

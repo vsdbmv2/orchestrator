@@ -262,7 +262,7 @@ export default {
 		}
 	},
 
-	async getGiListFromOrganismName(term: string) {
+	async getGiListFromOrganismName(term: string, retries = 0): Promise<any> {
 		try {
 			const response = await axios.get(eSearchUrl as string, {
 				params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey, retmax: 10000000 }, //10kk max
@@ -276,8 +276,11 @@ export default {
 			}
 			return response.data;
 		} catch (err) {
-			console.log(err);
-			throw new Error("Could not collect sequence id.");
+			if (retries === 10) {
+				console.log(err);
+				throw new Error("Could not collect sequence id.");
+			}
+			return await this.getGiListFromOrganismName(term, retries + 1);
 		}
 	},
 

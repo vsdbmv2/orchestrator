@@ -1,15 +1,9 @@
-import { Request, Response } from "restify";
+import { Request, Response } from "express";
 
 import sha1 from "sha1";
 import knex from "../services/database";
 import { IUser } from "../@types";
 
-type userController = {
-	createUser: (req: Request, res: Response) => Promise<void>;
-	deleteUser: (req: Request, res: Response, user: IUser) => Promise<void>;
-	getUser: (req: Request, res: Response) => Promise<void>;
-	updateUser: (req: Request, res: Response, user_data: IUser) => Promise<void>;
-};
 export default {
 	async createUser(req: Request, res: Response) {
 		const { name, email, password } = req.body;
@@ -47,8 +41,8 @@ export default {
 		res.send({ status: "success", data: users });
 	},
 
-	async updateUser(req: Request, res: Response, user_data: IUser) {
-		const id = user_data.id;
+	async updateUser(req: Request, res: Response) {
+		const id = req.user?.id;
 
 		const { name, email, password } = req.body;
 
@@ -62,4 +56,4 @@ export default {
 
 		res.send({ status: "success", data: { message: "User updated successfully" } });
 	},
-} as userController;
+};

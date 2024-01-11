@@ -1,62 +1,16 @@
-import { Router } from "restify-router";
+import { Router } from "express";
 
 import userController from "../controllers/userController";
-import loginController from "../controllers/loginController";
-import { returnInternalServerError } from "../controllers/errorController";
+import auth from "../middlewares/auth";
 
-const router = new Router();
+const router = Router();
 
-router.post("/user/", async function (req, res) {
-	//executa aqui quando a rota for chamada.
-	userController.createUser(req, res).catch((error) => {
-		returnInternalServerError(error as Error, res);
-	});
-});
+router
+	.route("/user/")
+	.post(userController.createUser)
+	.get(auth.getUser("op"), userController.getUser)
+	.put(auth.getUser("user"), userController.updateUser);
 
-router.del("/user/:id", async function (req, res) {
-	try {
-		const user = await loginController.verifyToken(req, "op");
-		if (!user) {
-			throw new Error("Token Inválido");
-		} else {
-			userController.deleteUser(req, res, user).catch((error) => {
-				returnInternalServerError(error as Error, res);
-			});
-		}
-	} catch (error) {
-		returnInternalServerError(error as Error, res);
-	}
-});
-
-router.get("/user/", async function (req, res) {
-	//para request autenticado, basta descomentar abaixo...
-	try {
-		const user = await loginController.verifyToken(req, "op");
-		if (!user) {
-			throw new Error("Token Inválido");
-		} else {
-			userController.getUser(req, res).catch((error) => {
-				returnInternalServerError(error as Error, res);
-			});
-		}
-	} catch (error) {
-		returnInternalServerError(error as Error, res);
-	}
-});
-
-router.put("/user/", async function (req, res) {
-	try {
-		const user = await loginController.verifyToken(req, "user");
-		if (!user) {
-			throw new Error("Token Inválido");
-		} else {
-			userController.updateUser(req, res, user).catch((error) => {
-				returnInternalServerError(error as Error, res);
-			});
-		}
-	} catch (error) {
-		returnInternalServerError(error as Error, res);
-	}
-});
+router.delete("/user/:id", auth.getUser("op"), userController.deleteUser);
 
 export default router;

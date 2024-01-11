@@ -1,4 +1,4 @@
-import { Request, Response } from "restify";
+import { Request, Response } from "express";
 import dotenv from "dotenv";
 import knex from "../services/database";
 

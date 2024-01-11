@@ -17,11 +17,11 @@ const getProtein = (value: Node): IProtein | null => {
 	const XPathName = xpath.select(
 		".//INSDQualifier_name[text()='product']/following-sibling::INSDQualifier_value/text()[1]",
 		value
-	);
-	const nameNode = XPathName[0] as Node;
+	) as Node[];
+	const nameNode = XPathName[0];
 	const name = nameNode?.textContent || false;
-	const XPathLocation = xpath.select(".//INSDFeature_location/text()[1]", value);
-	const locNode = XPathLocation[0] as Node;
+	const XPathLocation = xpath.select(".//INSDFeature_location/text()[1]", value) as Node[];
+	const locNode = XPathLocation[0];
 	const locText = locNode?.textContent || false;
 	let location: ILocation | ILocation[] | undefined;
 	if (typeof locText === "string" && locText.includes("join")) {
@@ -42,7 +42,7 @@ const getProtein = (value: Node): IProtein | null => {
 };
 
 export const getProteins = (xml: XMLDocument) => {
-	const result = xpath.select("//INSDFeature", xml);
+	const result = xpath.select("//INSDFeature", xml) as Node[];
 	const values: IProtein[] = [];
 	if (typeof result !== "undefined") {
 		result.forEach((value: xpath.SelectedValue) => {

@@ -1,4 +1,4 @@
-import { Response } from "restify";
+import { Response } from "express";
 
 type errorController = {
 	returnInternalServerError: (error: Error, res: Response) => void;

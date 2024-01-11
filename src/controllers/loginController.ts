@@ -1,4 +1,4 @@
-import { Request, Response } from "restify";
+import { Request, Response } from "express";
 import dotenv from "dotenv";
 import knex from "../services/database";
 import jwt from "jsonwebtoken";
@@ -8,7 +8,7 @@ dotenv.config();
 // import email from "../utils/mailgunEmailController";
 
 export default {
-	async login(req: Request, res: Response) {
+	login: async (req: Request, res: Response) => {
 		const data = await knex("user")
 			.where("email", req.body.email)
 			.andWhere("password", sha1(req.body.password))
@@ -18,7 +18,7 @@ export default {
 		} else {
 			jwt.sign({ data }, process.env.SV_SECRET as string, (err: Error | null, token: string | undefined) => {
 				if (!err) {
-					data.password = "hidden";
+					delete data.password;
 					res.json({ status: "success", data: { token, user: data } });
 				} else {
 					throw new Error("Token could not be created.");
@@ -27,7 +27,7 @@ export default {
 		}
 	},
 
-	async verifyToken(req: Request, context: "user" | "op") {
+	verifyToken: async (req: Request, context: "user" | "op") => {
 		const bearerHeader = req?.headers["authorization"];
 		if (typeof bearerHeader !== "undefined") {
 			const tkn = bearerHeader.split(" ")[1] as string;

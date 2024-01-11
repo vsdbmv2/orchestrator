@@ -9,7 +9,6 @@ export function hashObjectBy<T, K extends keyof T>(
 	array: T[],
 	keyName: K
 ): {
-	// [key in K]: T | T[];
 	[key: string]: T | T[];
 } {
 	return array.reduce(
@@ -23,11 +22,14 @@ export function hashObjectBy<T, K extends keyof T>(
 	);
 }
 
-export function hashToArray<T, K extends keyof T>(hashedObject: T): K[] {
-	return Object.values(hashedObject);
+export function hashToArray<T extends { [key: string]: any }, K extends keyof T>(hashedObject: T) {
+	return Object.keys(hashedObject).map((key) => hashedObject[key]);
 }
 
-export function changeHashKey<T, K extends keyof T>(hashedObject: T, newKey: keyof T[K]) {
+export function changeHashKey<T extends { [key: string]: any }, K extends keyof T>(
+	hashedObject: T,
+	newKey: keyof T[K]
+) {
 	return hashObjectBy(Object.values(hashedObject).flat(), newKey);
 }
 

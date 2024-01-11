@@ -1,17 +1,8 @@
-import { Router } from "restify-router";
+import { Router } from "express";
 import loginController from "../controllers/loginController";
-import { returnInternalServerError } from "../controllers/errorController";
 
-const router = new Router();
+const router = Router();
 
-router.post("/login/", function (req, res) {
-	try {
-		loginController.login(req, res).catch((error) => {
-			returnInternalServerError(error, res);
-		});
-	} catch (error) {
-		returnInternalServerError(error as Error, res);
-	}
-});
+router.post("/login/", loginController.login);
 
 export default router;

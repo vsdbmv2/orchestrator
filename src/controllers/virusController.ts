@@ -12,7 +12,6 @@ import md5 from "md5";
 import createStatement from "../utils/viral_model";
 import ncbi_utils from "../services/ncbi_utils";
 import hashMapFunctions from "../utils/hashMapFunctions";
-import { Knex } from "knex";
 
 type countSequences = {
 	sequences_length: number;
@@ -49,6 +48,39 @@ export const update = async (req: Request, res: Response) => {
 	res.send({ status: "success", data: { message: "Virus updated successfully." } });
 };
 
+export const cleanUpDuplicateGis = async (req: Request, res: Response) => {
+	const viruses = await knex("virus").select();
+	for (const virus of viruses) {
+		const duplicatedGis = await knex
+			.withSchema(virus.database_name)
+			.table("sequence")
+			.distinct<{ gi: string }[]>("gi")
+			.groupBy("gi")
+			.having(knex.raw("count(gi) > 1"));
+		const duplicated = await knex
+			.withSchema(virus.database_name)
+			.table("sequence")
+			.select<{ gi: string; id: number }[]>(["id", "gi"])
+			.whereIn(
+				"gi",
+				duplicatedGis.map(({ gi }) => gi)
+			);
+		const hashed: { [key: string]: number[] } = {};
+		duplicated.forEach(({ gi, id }) => {
+			if (hashed[gi]) return hashed[gi].push(id);
+			hashed[gi] = [id];
+		});
+		const bulkDelete: number[] = [];
+		Object.keys(hashed).forEach((gi) => {
+			const [_keep, ...toDelete] = hashed[gi];
+			if (toDelete.length) bulkDelete.push(...toDelete);
+		});
+		if (!bulkDelete.length) continue;
+		await knex.withSchema(virus.database_name).table("sequence").whereIn("id", bulkDelete).del();
+	}
+	res.send({ status: "success" });
+};
+
 export const create = async (req: Request, res: Response) => {
 	const response = req.body;
 	console.log(response);
@@ -63,69 +95,62 @@ export const create = async (req: Request, res: Response) => {
 	};
 
 	const org_name = await ncbi_utils.getOrganismName(data.organism_refseq);
-	if (org_name && org_name.length > 0) {
-		data.organism_name = org_name;
-	}
+	if (org_name?.length) data.organism_name = org_name;
 
 	const db_name = md5(data.organism_name.toLowerCase());
 	if (await verifyCreateData(res, data, data.organism_name)) {
 		//alright now we need to find this virus in db or create a new one.
 		const already_exists = await knex("virus").where("database_name", db_name);
-		if (already_exists.length > 0) {
-			res.send({ status: "success", data: { message: "Database for this Virus already exists!" } });
-		} else {
-			//all clear, lets create a new database
-			//first the virus model for central database
-			const virus_model = {
-				name: data.organism_name,
-				reference_accession: data.organism_refseq,
-				database_name: db_name,
-			};
-			await knex("virus").insert(virus_model);
-			// now we should instantiate the database
-			await createStatement(db_name);
-			// lets populate the virus db with the references/subtypes sequences
-			const knex_virus = knexLocal({
-				client: "mysql2",
-				connection: {
-					host: process.env.DB_HOST_CONTEXT_VSDBM as string,
-					user: process.env.DB_USER_CONTEXT_VSDBM as string,
-					password: process.env.DB_PASSWORD_CONTEXT_VSDBM as string,
-					database: db_name,
-					multipleStatements: true,
-				},
-				pool: {
-					min: 1,
-					max: 1,
-				},
-			});
-			// download the reference sequence and after it the subtypes sequences
-			await acquireAndSaveSequence(data.organism_refseq, knex_virus);
-			//getSequence(data.organism_refseq);
-			for (const subtype of data.organism_subtypes) {
-				// console.log(Array(40).fill('-').join(''));
-				// console.log(subtype);
-				const { label, refseq } = subtype;
-				//save the subtype
-				const id_subtype = (await knex_virus("subtype").insert({ description: label }))[0];
-				//save now the refseq or refseqs for the subtype
-				if (Array.isArray(refseq)) {
-					for (const unique_refseq of refseq) {
-						// save the sequence
-						const id_sequence = await acquireAndSaveSequence(unique_refseq, knex_virus);
-						//link them
-						await knex_virus("subtype_reference_sequence").insert({ idsequence: id_sequence, idsubtype: id_subtype });
-					}
-				} else {
+		if (already_exists.length)
+			return res.send({ status: "success", data: { message: "Database for this Virus already exists!" } });
+		//all clear, lets create a new database
+		//first the virus model for central database
+		const virus_model = {
+			name: data.organism_name,
+			reference_accession: data.organism_refseq,
+			database_name: db_name,
+		};
+		await knex("virus").insert(virus_model);
+		// now we should instantiate the database
+		await createStatement(db_name);
+		// lets populate the virus db with the references/subtypes sequences
+		const knex_virus = knexLocal({
+			client: "mysql2",
+			connection: {
+				host: process.env.DB_HOST_CONTEXT_VSDBM as string,
+				user: process.env.DB_USER_CONTEXT_VSDBM as string,
+				password: process.env.DB_PASSWORD_CONTEXT_VSDBM as string,
+				database: db_name,
+				multipleStatements: true,
+			},
+			pool: {
+				min: 1,
+				max: 1,
+			},
+		});
+		// download the reference sequence and after it the subtypes sequences
+		await acquireAndSaveSequence(data.organism_refseq, knex_virus);
+		for (const subtype of data.organism_subtypes) {
+			const { label, refseq } = subtype;
+			//save the subtype
+			const id_subtype = (await knex_virus("subtype").insert({ description: label }))[0];
+			//save now the refseq or refseqs for the subtype
+			if (Array.isArray(refseq)) {
+				for (const unique_refseq of refseq) {
 					// save the sequence
-					const id_sequence = await acquireAndSaveSequence(refseq, knex_virus);
+					const id_sequence = await acquireAndSaveSequence(unique_refseq, knex_virus);
 					//link them
 					await knex_virus("subtype_reference_sequence").insert({ idsequence: id_sequence, idsubtype: id_subtype });
 				}
+			} else {
+				// save the sequence
+				const id_sequence = await acquireAndSaveSequence(refseq, knex_virus);
+				//link them
+				await knex_virus("subtype_reference_sequence").insert({ idsequence: id_sequence, idsubtype: id_subtype });
 			}
-			// and then create the cronjob to do stuff and notify the user when all processes were finished
-			res.send({ status: "success", data: { message: "Virus database created successfully." } });
 		}
+		// and then create the cronjob to do stuff and notify the user when all processes were finished
+		res.send({ status: "success", data: { message: "Virus database created successfully." } });
 	}
 };
 
@@ -197,11 +222,9 @@ const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries
 		for (const feature_qualifiers of sequence_parsed.features as any[]) {
 			feature_qualifiers.idsequence = id_sequence;
 			const feature = { ...feature_qualifiers };
-			if ("qualifiers" in feature) {
-				delete feature.qualifiers;
-			}
+			if ("qualifiers" in feature) delete feature.qualifiers;
+
 			const id_feature = await knex.withSchema(virus.database_name).table("sequence_feature").insert(feature);
-			// if (feature_qualifiers.qualifiers && Array.isArray(feature_qualifiers.qualifiers)) {
 			const qualifiers = feature_qualifiers.qualifiers.map((element: IFeatureQualifier) => ({
 				...element,
 				idsequence_feature: id_feature,
@@ -224,19 +247,15 @@ export const downloadViralSequenceDatabase = async (virus: IVirus) => {
 	try {
 		console.log("Downloading organism info...");
 		const ncbi_gis = await ncbi_utils.getGiListFromOrganismName(virus.name);
-		if (ncbi_gis && ncbi_gis.esearchresult && ncbi_gis.esearchresult.idlist) {
-			console.log("Found " + ncbi_gis.esearchresult.count + " sequences on NCBI.");
+		if (ncbi_gis?.esearchresult?.idlist?.length) {
+			console.log("Found " + ncbi_gis?.esearchresult?.count + " sequences on NCBI.");
 			console.log("Working on diffList...");
-			const gis = await knex.withSchema(virus.database_name).table("sequence").select("gi");
-			const databaseGis = hashMapFunctions.hashObjectBy(gis, "gi");
-
-			const final_gis: string[] = [];
-
-			for (const gi of ncbi_gis.esearchresult.idlist) {
-				if (!(gi in databaseGis)) {
-					final_gis.push(gi);
-				}
+			const gis: { gi: string }[] = await knex.withSchema(virus.database_name).table("sequence").distinct("gi");
+			const databaseGis = new Map();
+			for (const { gi } of gis) {
+				databaseGis.set(gi, true);
 			}
+			const final_gis: string[] = ncbi_gis.esearchresult.idlist.filter((gi: string) => !databaseGis.has(gi));
 			console.log("DiffList contains " + final_gis.length + " sequences.");
 			if (final_gis.length > 0) {
 				console.log("Starting sequence download...");
@@ -264,4 +283,5 @@ export default {
 	tryToGetOrganismName,
 	acquireAndSaveSequence,
 	downloadViralSequenceDatabase,
+	cleanUpDuplicateGis,
 };

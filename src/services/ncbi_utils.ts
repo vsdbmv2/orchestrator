@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import axios from "axios";
 import { xml2json } from "xml-js";
 // import { transform } from 'camaro';
-import { IViralSequence } from "../@types";
+import { EsearchResult, IViralSequence } from "../@types";
 import { IINSDSeq } from "../@types/Sequence.interface";
 
 dotenv.config();
@@ -262,9 +262,9 @@ export default {
 		}
 	},
 
-	async getGiListFromOrganismName(term: string, retries = 0): Promise<any> {
+	async getGiListFromOrganismName(term: string, retries = 0): Promise<EsearchResult> {
 		try {
-			const response = await axios.get(eSearchUrl as string, {
+			const response = await axios.get<EsearchResult>(eSearchUrl as string, {
 				params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey, retmax: 10000000 }, //10kk max
 				headers: {
 					"content-type": "application/json",

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "nodemon --watch 'src/' --exec 'ts-node ./src/server.ts' -e ts",
+    "dev2": "node --env-file=.env --import=tsx --watch ./src/server.ts",
     "dev:test:subtype": "nodemon --exec 'ts-node test-get-subtype.ts' -e ts",
     "start": "node dist/server.js",
     "copyDownloader": "cp ./src/utils/DownloadAndUnpackIEDB.sh ./dist/utils",
@@ -49,6 +50,7 @@
     "@types/knex": "^0.16.1",
     "@types/mailgun-js": "^0.22.12",
     "@types/md5": "^2.3.1",
+    "@types/node": "^20.11.0",
     "@types/node-cron": "^2.0.4",
     "@types/restify": "^8.5.2",
     "@types/restify-cors-middleware": "^1.0.2",
@@ -65,6 +67,7 @@
     "nodemon": "^2.0.12",
     "prettier": "^2.6.2",
     "ts-node": "^10.8.0",
+    "tsx": "^4.7.0",
     "xml-js": "^1.6.11"
   }
 }

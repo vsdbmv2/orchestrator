@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { xml2json } from "xml-js";
 // import { transform } from 'camaro';
 import { EsearchResult, IViralSequence } from "../@types";
@@ -23,7 +23,7 @@ const xmlToJson = (data: string) =>
 	JSON.parse(xml2json(data, { compact: true, spaces: 4, textFn: RemoveJsonTextAttribute }));
 
 export default {
-	async getGiList(term: string) {
+	async getGiList(term: string, retries = 0): Promise<EsearchResult> {
 		try {
 			const response = await axios.get(eSearchUrl as string, {
 				params: { db: "nuccore", term: term, retmode: "json", field: "Accession", api_key: apiKey },
@@ -35,14 +35,18 @@ export default {
 			if (response.status !== 200 || response.data === null) {
 				throw new Error("Could not collect sequence id.");
 			}
-			return response.data;
+			return response.data as EsearchResult;
 		} catch (err) {
+			if (((err as AxiosError)?.code as string) === "ECONNRESET" && retries < 5) {
+				await new Promise((resolve) => setTimeout(resolve, 200));
+				return this.getGiList(term, retries + 1);
+			}
 			//console.log(err);
 			throw new Error("Could not collect sequence id.");
 		}
 	},
 
-	async downloadSingleSequence(accession_version: string) {
+	async downloadSingleSequence(accession_version: string, retries = 0): Promise<any | null> {
 		const gi_list = await this.getGiList(accession_version);
 		if (gi_list?.esearchresult?.idlist?.length > 0) {
 			try {
@@ -64,6 +68,10 @@ export default {
 				}
 				return xmlToJson(response.data);
 			} catch (err) {
+				if (retries < 5) {
+					await new Promise((resolve) => setTimeout(resolve, 200));
+					return this.downloadSingleSequence(accession_version, retries + 1);
+				}
 				console.log(err);
 				throw new Error("Could not collect sequence data.");
 			}
@@ -72,7 +80,7 @@ export default {
 		}
 	},
 
-	async downloadSingleSequenceFromGi(gi: string) {
+	async downloadSingleSequenceFromGi(gi: string, retries = 0): Promise<any> {
 		try {
 			const response = await axios.get(eFetchUrl as string, {
 				params: { db: "nuccore", id: gi, rettype: "gbc", retmode: "xml", api_key: apiKey },
@@ -87,15 +95,17 @@ export default {
 
 			return xmlToJson(response.data);
 		} catch (err) {
+			if (retries < 10) {
+				await new Promise((resolve) => setTimeout(resolve, 3520));
+				return this.downloadSingleSequenceFromGi(gi, retries + 1);
+			}
 			console.log(err);
-			setTimeout(() => {
-				this.downloadSingleSequenceFromGi(gi);
-			}, 3520);
-			//throw new Error('Could not collect sequence data.');
+			throw new Error("Could not collect sequence data.");
 		}
 	},
 
 	async modulateFromINSDSeqToVSDBMSeq(INSDSeq: IINSDSeq) {
+		if (!INSDSeq) return;
 		const getGi = () => {
 			const seqId = INSDSeq["INSDSeq_other-seqids"]?.INSDSeqid;
 			if (typeof seqId === "string") {
@@ -223,7 +233,7 @@ export default {
 
 	async getOrganismName(accession_version: string) {
 		const gi_list = await this.getGiList(accession_version);
-		if (gi_list && gi_list.esearchresult && gi_list.esearchresult.idlist && gi_list.esearchresult.idlist.length > 0) {
+		if (gi_list?.esearchresult?.idlist?.length) {
 			try {
 				const response = await axios.get(eFetchUrl as string, {
 					params: {

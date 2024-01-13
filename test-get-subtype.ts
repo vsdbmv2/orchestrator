@@ -1,6 +1,6 @@
 import getProteins from "./src/utils/getProteinsINSD";
 import { writeFileSync } from "node:fs";
-import { getSubtypes, getRefseqs } from "./src/utils/getSubtypes";
+import { getSubtypes, getAssemblyGenomeRefseqs } from "./src/utils/getSubtypes";
 
 // console.log("┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐");
 // console.log("├──────────────────────────────────────────────── HCV ────────────────────────────────────────────────┤");
@@ -10,7 +10,7 @@ import { getSubtypes, getRefseqs } from "./src/utils/getSubtypes";
 // console.log("└─────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 const main = async () => {
 	const subtypes = await getSubtypes(11103);
-	const accessions = await getRefseqs(Object.keys(subtypes));
+	const accessions = await getAssemblyGenomeRefseqs(Object.keys(subtypes));
 	const mutatedSubtypes = Object.entries(accessions)
 		.map(([key, value]) => {
 			if (subtypes[key]) {

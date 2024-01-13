@@ -141,4 +141,16 @@ class TaskManager {
 	}
 }
 
-export default TaskManager;
+class Singleton {
+	private static instance: TaskManager;
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private constructor() {}
+
+	public static getInstance(): TaskManager {
+		if (!this.instance) this.instance = new TaskManager();
+		return this.instance;
+	}
+}
+
+export const taskManager = Singleton.getInstance();
+export default Singleton.getInstance();

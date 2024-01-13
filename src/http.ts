@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import express from "express";
 import cors from "cors";
-import TaskManager from "./utils/taskManager";
+// import TaskManager, { taskManager } from "./utils/taskManager";
 import http from "http";
 import { Server } from "socket.io";
-import { refSeq, seq, epitopes } from "./utils/TestSequences";
+// import { refSeq, seq, epitopes } from "./utils/TestSequences";
 
 import epitopeRoutes from "./routes/epitopeRoutes";
 import frontendRoutes from "./routes/frontendRoutes";
@@ -13,14 +13,14 @@ import sequenceRoutes from "./routes/sequenceRoutes";
 import userRoutes from "./routes/userRoutes";
 import virusRoutes from "./routes/virusRoutes";
 
-const taskManager = new TaskManager();
+// const taskManager = new TaskManager();
 // testing with some works
 
-for (let i = 0; i < 50; i++) {
-	taskManager.registerWork("global-mapping", refSeq, i, seq, 1);
-	taskManager.registerWork("local-mapping", refSeq, i, seq, 1);
-	taskManager.registerWork("epitope-mapping", i % 2 === 0 ? refSeq : seq, i, epitopes);
-}
+// for (let i = 0; i < 50; i++) {
+// taskManager.registerWork("global-mapping", refSeq, i, seq, 1);
+// 	taskManager.registerWork("local-mapping", refSeq, i, seq, 1);
+// 	taskManager.registerWork("epitope-mapping", i % 2 === 0 ? refSeq : seq, i, epitopes);
+// }
 declare global {
 	namespace Express {
 		interface Request {
@@ -61,4 +61,4 @@ const io = new Server(server, {
 	},
 });
 
-export { server, io, taskManager };
+export { server, io };

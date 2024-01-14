@@ -10,3 +10,17 @@ export const getMemoryUsage = () => {
 
 	return memoryUsage;
 };
+
+export const log = (message: string, virus?: string) => {
+	if (message[0] !== "[") {
+		if (virus?.length) {
+			return console.log(`[${virus}][${new Date().toLocaleString()}] - ${message}`);
+		}
+		return console.log(`[${new Date().toLocaleString()}] - ${message}`);
+	}
+	const [header, realMessage] = message.split("] - ");
+	if (virus?.length) {
+		return console.log(`[${virus}][${header}][${new Date().toLocaleString()}] - ${realMessage}`);
+	}
+	return console.log(`${header}][${new Date().toLocaleString()}] - ${realMessage}`);
+};

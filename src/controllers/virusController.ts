@@ -13,6 +13,7 @@ import createStatement from "../utils/viral_model";
 import ncbi_utils from "../services/ncbi_utils";
 import hashMapFunctions from "../utils/hashMapFunctions";
 import { getRefseqs, getSubtypes } from "../utils/getSubtypes";
+import { log } from "../utils/helpers";
 
 type countSequences = {
 	sequences_length: number;
@@ -143,11 +144,11 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 				if (!id) continue;
 				sequenceIds.push(id);
 			} catch (error) {
-				console.log(`[${virus.name}] - Accession version ${accession} for subtype ${name} not found`);
+				log(`Accession version ${accession} for subtype ${name} not found`, virus.name);
 			}
 		}
 		if (sequenceIds.length === 0) {
-			console.log(`[${virus.name}] - no sequences to support subtype ${name}`);
+			log(`no sequences to support subtype ${name}`, virus.name);
 		} else {
 			await db.table("subtype_reference_sequence").insert(
 				sequenceIds.map((idsequence) => ({
@@ -157,16 +158,16 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 			);
 		}
 		if (isNew) {
-			console.log(`[${virus.name}] - subtype ${name} added with ${sequenceIds.length} sequences.`);
+			log(`subtype ${name} added with ${sequenceIds.length} sequences.`, virus.name);
 		}
 	}
-	console.log(`[${virus.name}] - subtypes up-to-date (${new Date()})`);
+	log(`subtypes up-to-date (${new Date()})`, virus.name);
 	await db.destroy();
 };
 
 export const create = async (req: Request, res: Response) => {
 	const response = req.body;
-	console.log("[create virus]", response);
+	log(`[create virus] - ${response}`);
 	const organism_name = (await tryToGetOrganismName(response.organism_refseq.trim())) as string;
 
 	const data = {
@@ -287,7 +288,7 @@ export const acquireAndSaveSequence = async (
 
 const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries = 0): Promise<number | undefined> => {
 	try {
-		console.log("Downloading: " + gi);
+		log("Downloading: " + gi, virus.name);
 		const raw_sequence = (await ncbi_utils.downloadSingleSequenceFromGi(gi))?.INSDSet?.INSDSeq;
 		const sequence_parsed = await ncbi_utils.modulateFromINSDSeqToVSDBMSeq(raw_sequence);
 		if (!sequence_parsed) throw new Error(`Sequence not found for gi ${gi}`);
@@ -315,37 +316,37 @@ const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries
 			await new Promise((resolve) => setTimeout(resolve, 2000));
 			return await downloadAndStoreSingleSequence(virus, gi, retries + 1);
 		}
-		console.log(`error downloading sequence ${gi}`);
+		log(`error downloading sequence ${gi}`, virus.name);
 	}
 };
 
 export const downloadViralSequenceDatabase = async (virus: IVirus) => {
 	try {
 		await verifySubtypes(virus);
-		console.log(`[${virus.name}] - Downloading organism info...`);
+		log("Downloading organism info...", virus.name);
 		const ncbi_gis = await ncbi_utils.getGiListFromOrganismName(virus.name);
 		if (ncbi_gis?.esearchresult?.idlist?.length) {
-			console.log(`[${virus.name}] - Found ${ncbi_gis?.esearchresult?.count} sequences on NCBI.`);
-			console.log("Working on diffList...");
+			log(`Found ${ncbi_gis?.esearchresult?.count} sequences on NCBI.`, virus.name);
+			log("Working on diffList...", virus.name);
 			const gis: { gi: string }[] = await knex.withSchema(virus.database_name).table("sequence").distinct("gi");
 			const databaseGis = new Map();
 			for (const { gi } of gis) {
 				databaseGis.set(gi, true);
 			}
 			const final_gis: string[] = ncbi_gis.esearchresult.idlist.filter((gi: string) => !databaseGis.has(gi));
-			console.log(`[${virus.name}] - DiffList contains ${final_gis.length} sequences.`);
+			log(`DiffList contains ${final_gis.length} sequences.`, virus.name);
 			if (final_gis.length > 0) {
-				console.log(`[${virus.name}] - Starting sequence download...`);
+				log("Starting sequence download...", virus.name);
 				const chunks = hashMapFunctions.toChunkArray(final_gis, 4);
 				for (const chunk of chunks) {
 					await Promise.all(chunk.map((gi: string) => downloadAndStoreSingleSequence(virus, gi)));
 				}
 
-				console.log(`[${virus.name}] - All ${virus.name} sequences downloaded.`);
+				log("All sequences downloaded.", virus.name);
 			}
 			await knex.table("virus").where("id", "=", virus.id).update({ latest_update: knex.fn.now() });
 		} else {
-			console.log("Aborting download...");
+			log("No gi list found from ncbi, aborting update", virus.name);
 		}
 	} catch (error) {
 		console.error(error);

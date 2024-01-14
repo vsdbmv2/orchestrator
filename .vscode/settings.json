@@ -1,14 +1,33 @@
 {
   "cSpell.words": [
+    "assminfo",
+    "creationdate",
+    "dbname",
     "epitope",
     "esearchresult",
+    "idbiosample",
     "idlist",
+    "idsubtype",
     "iedb",
+    "IINSD",
     "lucifrequence",
+    "moltype",
+    "pubmed",
+    "quals",
     "querytranslation",
     "retmax",
+    "retmode",
     "retstart",
+    "rettype",
+    "Seqid",
+    "seqids",
     "translationset",
-    "translationstack"
-  ]
+    "translationstack",
+    "txid",
+    "valign",
+    "wwwtax"
+  ],
+  "material-icon-theme.folders.associations": {
+    "iedb_backups": "database"
+  }
 }

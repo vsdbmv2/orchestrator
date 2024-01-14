@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { IVirus, IAssay } from "../@types";
 import knex from "../services/database";
 import { hashObjectBy } from "../utils/hashMapFunctions";
+import { log } from "../utils/helpers";
 
 export const getCount = async (req: Request, res: Response) => {
 	const { id } = req.params;
@@ -138,7 +139,7 @@ const getCommonDataForPair = async () => {
 };
 
 export const pairEpitopesBcellAssays = async (virus: IVirus) => {
-	console.log("Tracking bcell assays...");
+	log("[epitope-mapper][b-cell] - Tracking assays...", virus.name);
 	const top_epitope = await knex.withSchema(virus.database_name).table("epitope").where("count", ">", 1000);
 	const __bCells = await knex
 		.withSchema("iedb_public")
@@ -186,12 +187,12 @@ export const pairEpitopesBcellAssays = async (virus: IVirus) => {
 			}
 		}
 	}
-	console.log(assays.length + " bcell assays found.");
+	log(`[epitope-mapper][b-cell] - ${assays.length} bcell assays found.`, virus.name);
 	await knex.withSchema(virus.database_name).table("bcell_assay").truncate();
 	await knex.withSchema(virus.database_name).table("bcell_assay").insert(assays);
 };
 export const pairEpitopesTcellAssays = async (virus: IVirus) => {
-	console.log("Tracking tcell assays...");
+	log("[epitope-mapper][t-cell] - Tracking tcell assays...", virus.name);
 	const top_epitope = await knex.withSchema(virus.database_name).table("epitope").where("count", ">", 1000);
 	const __t_cell = await knex
 		.withSchema("iedb_public")
@@ -239,12 +240,12 @@ export const pairEpitopesTcellAssays = async (virus: IVirus) => {
 			}
 		}
 	}
-	console.log(assays.length + " tcell assays found.");
+	log(`[epitope-mapper][t-cell] - ${assays.length} tcell assays found.`, virus.name);
 	await knex.withSchema(virus.database_name).table("tcell_assay").truncate();
 	await knex.withSchema(virus.database_name).table("tcell_assay").insert(assays);
 };
 export const pairEpitopesMHCAssays = async (virus: IVirus) => {
-	console.log("Tracking mhc assays...");
+	log("[epitope-mapper][mhc] - Tracking mhc assays...", virus.name);
 	const top_epitope = await knex.withSchema(virus.database_name).table("epitope").where("count", ">", 1000);
 	const __mhc = await knex
 		.withSchema("iedb_public")
@@ -297,7 +298,7 @@ export const pairEpitopesMHCAssays = async (virus: IVirus) => {
 			}
 		}
 	}
-	console.log(assays.length + " mhc assays found.");
+	log(`[epitope-mapper][mhc] - ${assays.length} mhc assays found.`, virus.name);
 	await knex.withSchema(virus.database_name).table("mhc_assay").truncate();
 	await knex.withSchema(virus.database_name).table("mhc_assay").insert(assays);
 };

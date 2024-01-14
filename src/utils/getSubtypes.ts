@@ -38,7 +38,7 @@ export const getAssemblyGenomeRefseqs = async (
 	const test = await fetch(url)
 		.then((r) => r.json())
 		.catch((reason) => {
-			console.log(reason);
+			console.error(reason);
 		});
 	const result: { [key: string]: any } = {};
 	ncbi_ids_or_organisms_names.forEach((id) => {

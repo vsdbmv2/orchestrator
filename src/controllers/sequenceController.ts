@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import knex from "../services/database";
 import taskManager from "../utils/taskManager";
-import { getMemoryUsage } from "../utils/helpers";
+import { getMemoryUsage, log } from "../utils/helpers";
 
 dotenv.config();
 
@@ -74,7 +74,7 @@ export default {
 	},
 	async scheduleMappingWorks(virus: IVirus) {
 		if (getMemoryUsage().rss > 2 * 1024) return;
-		console.log(`[${virus.name}] - scheduling local alignment mapping`);
+		log("scheduling local alignment mapping", virus.name);
 		const [sequences, subtypes] = await Promise.all([
 			knex.withSchema(virus.database_name).table("sequence").select("id", "sequence").where({
 				id_subtype: null,
@@ -86,7 +86,7 @@ export default {
 				.join("subtype_reference_sequence", "subtype.id", "subtype_reference_sequence.idsubtype")
 				.join("sequence", "sequence.id", "subtype_reference_sequence.idsequence"),
 		]);
-		console.log(`[${virus.name}] - ${sequences.length} sequences and ${subtypes.length} subtype sequences to align`);
+		log(`${sequences.length} sequences and ${subtypes.length} subtype sequences to align`, virus.name);
 		let count = 0;
 		for (const sequence of sequences) {
 			if (getMemoryUsage().rss > 2 * 1024) break;
@@ -95,6 +95,6 @@ export default {
 				count++;
 			}
 		}
-		console.log(`[${virus.name}] - ${count} local alignments registered successfully`);
+		log(`${count} local alignments registered successfully`, virus.name);
 	},
 };

@@ -3,11 +3,13 @@ import knex from "../services/database";
 import virusController from "./virusController";
 import epitopeDownloader from "../services/EpitopeDownload";
 import sequenceController from "./sequenceController";
+import { log } from "../utils/helpers";
 
 type cronController = {
 	startCronJobs: () => Promise<void>;
 	downloadEpitopes: () => void;
 	sequenceDBUpdate: () => Promise<void>;
+	mappingUpdate: () => Promise<void>;
 };
 
 export default {
@@ -15,18 +17,17 @@ export default {
 		//process 1
 		if (!runJobsNow) this.sequenceDBUpdate();
 		//6h
-		cron.schedule("0 */2 * * * *", () => this.sequenceDBUpdate());
+		cron.schedule("0 */2 * * * *", () => this.mappingUpdate(), { timezone: "America/Sao_Paulo" });
 		//24h
-		cron.schedule("0 */24 * * * *", () => this.sequenceDBUpdate());
+		cron.schedule("0 */24 * * * *", () => this.sequenceDBUpdate(), { timezone: "America/Sao_Paulo" });
 		//process 2
-		if (runJobsNow) this.downloadEpitopes();
+		if (!runJobsNow) this.downloadEpitopes();
 		//7 dias
-		cron.schedule("0 0 * * 0 *", () => this.downloadEpitopes());
+		cron.schedule("0 0 * */7 * *", () => this.downloadEpitopes(), { timezone: "America/Sao_Paulo" });
 	},
 
 	downloadEpitopes() {
-		const today = new Date();
-		console.log(today + " | Cron Job -> | Running process | - Epitope download");
+		log("[cron-job] - | Running process | - Epitope download");
 		epitopeDownloader();
 	},
 
@@ -45,8 +46,7 @@ export default {
 	},
 
 	async sequenceDBUpdate() {
-		const today = new Date();
-		console.log(today + " | Cron Job -> | Running process | - Sequence Download");
+		log("[cron-job] - | Running process | - Sequence Download");
 		const viruses = await knex("virus").select();
 		for (const virus of viruses) {
 			await virusController.downloadViralSequenceDatabase(virus);

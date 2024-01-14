@@ -1,6 +1,7 @@
 import { io } from "./http";
 import { Socket } from "socket.io";
 import { Work, taskManager } from "./utils/taskManager";
+import { log } from "./utils/helpers";
 
 let clientsWorking: string[] = [];
 
@@ -14,39 +15,35 @@ const socketControl: socketControl = {
 
 io.on("connection", (socket: Socket) => {
 	const attributeWork = (worksAmount: number) => {
-		if (taskManager.size > 0 && !clientsWorking.includes(socket.id)) {
-			console.log(`|> getting work for client ${socket.id} at ${socket.handshake.address} | time: ${Date.now()}`);
-			const work: Work[] = taskManager.getWork(socket.id, worksAmount);
-			if (work.length > 0) {
-				clientsWorking.push(socket.id);
-				socket.emit("work", work);
-			}
-		}
+		if (taskManager.size === 0 || clientsWorking.includes(socket.id)) return;
+		log(`[socket] - getting work for client ${socket.id} at ${socket.handshake.address}`);
+		const work: Work[] = taskManager.getWork(socket.id, worksAmount);
+		if (work.length === 0) return;
+		clientsWorking.push(socket.id);
+		socket.emit("work", work);
 	};
 
 	socketControl.clients++;
-	console.log("Socket connected, id: ", socket.id);
+	log("[socket] - socket connected, id: ", socket.id);
 
 	const pong = setInterval(function () {
 		socket.emit("pong", { ...socketControl, startTime: Date.now() });
 	}, 500);
 
 	socket.on("get-work", ({ worksAmount }) => {
-		if (worksAmount && !isNaN(worksAmount)) {
-			attributeWork(worksAmount);
-		}
+		if (worksAmount && !isNaN(worksAmount) && worksAmount !== null) attributeWork(worksAmount);
 	});
 
 	socket.on("work-complete", (payloadWorks: Work[]) => {
 		taskManager.finishWork(payloadWorks);
 		clientsWorking = clientsWorking.filter((e) => e !== socket.id);
-		console.log(`works left: ${taskManager.size} | works doing: ${taskManager.sizeDoing}`);
+		log(`[socket] - works left: ${taskManager.size} | works doing: ${taskManager.sizeDoing}`);
 		// lidar com o resultado dos possíveis mapeamentos
 	});
 
 	socket.on("disconnect", () => {
 		socketControl.clients--;
-		console.log("socket disconected, id", socket.id);
+		log("[socket] - socket disconnected, id", socket.id);
 		taskManager.deallocateWork(socket.id);
 		clientsWorking = clientsWorking.filter((e) => e !== socket.id);
 		clearInterval(pong);

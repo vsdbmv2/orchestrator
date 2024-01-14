@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import axios, { AxiosError } from "axios";
 import { xml2json } from "xml-js";
-// import { transform } from 'camaro';
 import { EsearchResult, IViralSequence } from "../@types";
 import { IINSDSeq } from "../@types/Sequence.interface";
+import { log } from "../utils/helpers";
 
 dotenv.config();
 
@@ -72,7 +72,7 @@ export default {
 					await new Promise((resolve) => setTimeout(resolve, 200));
 					return this.downloadSingleSequence(accession_version, retries + 1);
 				}
-				console.log(err);
+				console.error(err);
 				throw new Error("Could not collect sequence data.");
 			}
 		} else {
@@ -99,7 +99,7 @@ export default {
 				await new Promise((resolve) => setTimeout(resolve, 3520));
 				return this.downloadSingleSequenceFromGi(gi, retries + 1);
 			}
-			console.log(err);
+			console.error(err);
 			throw new Error("Could not collect sequence data.");
 		}
 	},
@@ -264,7 +264,7 @@ export default {
 					return "";
 				}
 			} catch (err) {
-				console.log(err);
+				console.error(err);
 				throw new Error("Could not collect sequence data.");
 			}
 		} else {
@@ -274,7 +274,7 @@ export default {
 
 	async getGiListFromOrganismName(term: string, retries = 0): Promise<EsearchResult> {
 		try {
-			const response = await axios.get<EsearchResult>(eSearchUrl as string, {
+			let response = await axios.get<EsearchResult>(eSearchUrl as string, {
 				params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey, retmax: 10000000 }, //10kk max
 				headers: {
 					"content-type": "application/json",
@@ -284,10 +284,54 @@ export default {
 			if (response.status !== 200 || response.data === null) {
 				throw new Error("Could not collect sequence id.");
 			}
+			if ((response.data as unknown as string) === "") {
+				await new Promise((resolve) => setTimeout(resolve, 2000));
+				const ids = [];
+				response = await axios.get<EsearchResult>(eSearchUrl as string, {
+					params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey }, //10kk max
+					headers: {
+						"content-type": "application/json",
+					},
+				});
+				const total = +response.data.esearchresult.count;
+				let localCount = 0;
+				await new Promise((resolve) => setTimeout(resolve, 2000));
+				while (localCount < total) {
+					log(term, `getting gi list ${localCount}/${total}`);
+					let innerRetries = 0;
+					let done = false;
+					while (innerRetries < 5 && !done) {
+						try {
+							response = await axios.get<EsearchResult>(eSearchUrl as string, {
+								params: {
+									db: "nuccore",
+									term: term,
+									retmode: "json",
+									field: "Organism",
+									api_key: apiKey,
+									retmax: 100000,
+									retstart: localCount,
+								}, //10kk max
+								headers: {
+									"content-type": "application/json",
+								},
+							});
+							done = true;
+						} catch {
+							await new Promise((resolve) => setTimeout(resolve, 2000));
+							innerRetries++;
+						}
+					}
+					ids.push(...response.data.esearchresult.idlist);
+					localCount = localCount + 100000;
+					await new Promise((resolve) => setTimeout(resolve, 2000));
+				}
+				response.data.esearchresult.idlist = ids;
+			}
 			return response.data;
 		} catch (err) {
 			if (retries === 10) {
-				console.log(err);
+				console.error(err);
 				throw new Error("Could not collect sequence id.");
 			}
 			return await this.getGiListFromOrganismName(term, retries + 1);

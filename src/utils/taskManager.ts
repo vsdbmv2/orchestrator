@@ -6,7 +6,8 @@ import {
 	workStatus,
 	workType,
 } from "@vsdbmv2/mapping-library/types/@types";
-import { createHash } from "crypto";
+import { mappingUpdate } from "../controllers/cronController";
+import { v4 as uuid } from "uuid";
 
 export class Work implements IWork {
 	public status: workStatus;
@@ -32,7 +33,7 @@ export class Work implements IWork {
 		if (id2) this.id2 = id2;
 		if (type === "global-mapping" || type === "local-mapping") this.sequence2 = sequence2 as string;
 		if (type === "epitope-mapping") this.epitopes = sequence2 as string[];
-		this.identifier = createHash("md5").update(new Date().toISOString()).digest("hex");
+		this.identifier = uuid();
 		this.startTime = 0;
 		this.endTime = 0;
 	}
@@ -101,7 +102,7 @@ class TaskManager {
 		}
 	}
 
-	finishWork(finishedWork: Work[]) {
+	async finishWork(finishedWork: Work[]) {
 		const ids = finishedWork.map((work: Work) => work.identifier);
 		//aqui finaliza uma task removendo ela do doing e salvando o resultado (pode alocar algo pra análise ou sei la)
 		//const work: Work | undefined = this.doing.find((work: Work) => work.identifier === identifier && work.workerId === identifier);
@@ -138,6 +139,7 @@ class TaskManager {
 				}
 			}
 		});
+		if (this.size === 0) await mappingUpdate();
 	}
 }
 

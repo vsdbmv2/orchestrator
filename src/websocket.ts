@@ -24,18 +24,18 @@ io.on("connection", (socket: Socket) => {
 	};
 
 	socketControl.clients++;
-	log("[socket] - socket connected, id: ", socket.id);
+	log(`[socket] - socket connected, id: ${socket.id}`);
 
-	const pong = setInterval(function () {
-		socket.emit("pong", { ...socketControl, startTime: Date.now() });
+	const ping = setInterval(function () {
+		socket.emit("ping", { ...socketControl, startTime: Date.now() });
 	}, 500);
 
 	socket.on("get-work", ({ worksAmount }) => {
 		if (worksAmount && !isNaN(worksAmount) && worksAmount !== null) attributeWork(worksAmount);
 	});
 
-	socket.on("work-complete", (payloadWorks: Work[]) => {
-		taskManager.finishWork(payloadWorks);
+	socket.on("work-complete", async (payloadWorks: Work[]) => {
+		await taskManager.finishWork(payloadWorks);
 		clientsWorking = clientsWorking.filter((e) => e !== socket.id);
 		log(`[socket] - works left: ${taskManager.size} | works doing: ${taskManager.sizeDoing}`);
 		// lidar com o resultado dos possíveis mapeamentos
@@ -43,9 +43,9 @@ io.on("connection", (socket: Socket) => {
 
 	socket.on("disconnect", () => {
 		socketControl.clients--;
-		log("[socket] - socket disconnected, id", socket.id);
+		log(`[socket] - socket disconnected, id ${socket.id}`);
 		taskManager.deallocateWork(socket.id);
 		clientsWorking = clientsWorking.filter((e) => e !== socket.id);
-		clearInterval(pong);
+		clearInterval(ping);
 	});
 });

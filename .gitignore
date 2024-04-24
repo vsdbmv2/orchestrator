@@ -14,3 +14,4 @@ node_modules
 /dist
 /types
 /coverage
+iedb_public*.sql

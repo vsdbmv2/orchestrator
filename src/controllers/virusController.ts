@@ -82,6 +82,40 @@ export const cleanUpDuplicateGis = async (req: Request, res: Response) => {
 	}
 	res.send({ status: "success" });
 };
+export const cleanUpDuplicateSubtypeMap = async (req: Request, res: Response) => {
+	const viruses = await knex("virus").select();
+	for (const virus of viruses) {
+		const duplicatedSubtyping = await knex
+			.withSchema(virus.database_name)
+			.table("subtype_reference_sequence")
+			.where("is_refseq", "=", false)
+			.groupBy(knex.raw("CONCAT(idsequence,'-' ,idsubtype)"))
+			.having(knex.raw("count(CONCAT(idsequence,'-' ,idsubtype)) > 1"))
+			.select<{ combination: string }[]>(knex.raw("CONCAT(idsequence,'-' ,idsubtype) AS combination"));
+		const duplicated = await knex
+			.withSchema(virus.database_name)
+			.table("subtype_reference_sequence")
+			.whereIn(
+				// @ts-ignore
+				knex.raw("CONCAT(idsequence,'-' ,idsubtype)"),
+				duplicatedSubtyping.map(({ combination }) => combination)
+			)
+			.select("id", "idsequence", "idsubtype");
+		const hashed: { [key: string]: number[] } = {};
+		duplicated.forEach(({ idsequence, idsubtype, id }) => {
+			if (hashed[`${idsequence}_${idsubtype}`]) return hashed[`${idsequence}_${idsubtype}`].push(id);
+			hashed[`${idsequence}_${idsubtype}`] = [id];
+		});
+		const bulkDelete: number[] = [];
+		Object.keys(hashed).forEach((gi) => {
+			const [_keep, ...toDelete] = hashed[gi];
+			if (toDelete.length) bulkDelete.push(...toDelete);
+		});
+		if (!bulkDelete.length) continue;
+		await knex.withSchema(virus.database_name).table("subtype_reference_sequence").whereIn("id", bulkDelete).del();
+	}
+	res.send({ status: "success" });
+};
 
 export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 	const db = knexLocal({
@@ -154,12 +188,11 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 				sequenceIds.map((idsequence) => ({
 					idsequence,
 					idsubtype,
+					is_refseq: true,
 				}))
 			);
 		}
-		if (isNew) {
-			log(`subtype ${name} added with ${sequenceIds.length} sequences.`, virus.name);
-		}
+		if (isNew) log(`subtype ${name} added with ${sequenceIds.length} sequences.`, virus.name);
 	}
 	log(`subtypes up-to-date (${new Date()})`, virus.name);
 	await db.destroy();
@@ -363,4 +396,5 @@ export default {
 	acquireAndSaveSequence,
 	downloadViralSequenceDatabase,
 	cleanUpDuplicateGis,
+	cleanUpDuplicateSubtypeMap,
 };

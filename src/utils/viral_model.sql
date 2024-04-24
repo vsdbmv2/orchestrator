@@ -26,8 +26,6 @@ CREATE TABLE IF NOT EXISTS `viral_model`.`sequence` (
   `creationdate` DATE NULL,
   `idbiosample` VARCHAR(100) NULL,
   `pubmed_id` TEXT NULL,
-  `id_subtype` INT NULL,
-  `subtype_score` DOUBLE NULL,
   `map_init` INT NULL,
   `map_end` INT NULL,
   `coverage_pct` DOUBLE NULL,
@@ -86,6 +84,8 @@ CREATE TABLE IF NOT EXISTS `viral_model`.`subtype_reference_sequence` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idsubtype` INT NULL,
   `idsequence` INT NULL,
+  `is_refseq` TINYINT 0,
+  `subtype_score` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

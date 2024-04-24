@@ -35,15 +35,15 @@ export const downloadEpitopes = async () => {
 export default {
 	async startCronJobs(runJobsNow = false) {
 		//process 1
-		if (!runJobsNow) mappingUpdate();
+		// if (!runJobsNow) mappingUpdate();
 		//6h
-		cron.schedule("0 */2 * * * *", () => mappingUpdate(), { timezone: "America/Sao_Paulo" });
+		// cron.schedule("0 */2 * * * *", () => mappingUpdate(), { timezone: "America/Sao_Paulo" });
 		// //24h
-		cron.schedule("0 */24 * * * *", () => sequenceDBUpdate(), { timezone: "America/Sao_Paulo" });
+		// cron.schedule("0 */24 * * * *", () => sequenceDBUpdate(), { timezone: "America/Sao_Paulo" });
 		// //process 2
-		if (!runJobsNow) downloadEpitopes();
+		// if (!runJobsNow) downloadEpitopes();
 		// //7 dias
-		cron.schedule("0 0 * */7 * *", () => downloadEpitopes(), { timezone: "America/Sao_Paulo" });
+		// cron.schedule("0 0 * */7 * *", () => downloadEpitopes(), { timezone: "America/Sao_Paulo" });
 	},
 	mappingUpdate,
 	sequenceDBUpdate,

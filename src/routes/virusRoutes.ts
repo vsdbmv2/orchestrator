@@ -11,6 +11,7 @@ router
 	.delete(auth.getUser("op"), virusController.deleteVirus);
 
 router.route("/virus-cleanup/").get(auth.getUser("user"), virusController.cleanUpDuplicateGis);
+router.route("/virus-cleanup-subtypes/").get(auth.getUser("user"), virusController.cleanUpDuplicateSubtypeMap);
 
 router
 	.route("/virus/")

@@ -13,18 +13,17 @@ export default {
 			.where("email", req.body.email)
 			.andWhere("password", sha1(req.body.password))
 			.first();
-		if (!data) {
-			throw new Error("unauthorized");
-		} else {
-			jwt.sign({ data }, process.env.SV_SECRET as string, (err: Error | null, token: string | undefined) => {
-				if (!err) {
-					delete data.password;
-					res.json({ status: "success", data: { token, user: data } });
-				} else {
-					throw new Error("Token could not be created.");
-				}
-			});
-		}
+		if (!data) return res.status(401).send("unauthorized");
+
+		console.error("unauthorized");
+		jwt.sign({ data }, process.env.SV_SECRET as string, (err: Error | null, token: string | undefined) => {
+			if (!err) {
+				delete data.password;
+				return res.json({ status: "success", data: { token, user: data } });
+			} else {
+				return res.status(500).send("Token could not be created.");
+			}
+		});
 	},
 
 	verifyToken: async (req: Request, context: "user" | "op") => {

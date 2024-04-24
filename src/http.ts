@@ -39,13 +39,47 @@ declare global {
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+	"*",
+	"http://vsdbm.hfabio.dev",
+	"https://vsdbm.hfabio.dev",
+	"http://vsdbm.fiocruz.bahia.br",
+	"https://vsdbm.fiocruz.bahia.br",
+];
+
 app.use(
 	cors({
-		origin: "*",
+		origin: (origin, callback) => {
+			if (!origin) return callback(null, true);
+			if (!allowedOrigins.includes(origin)) {
+				return callback(new Error("Deu cors, irmão"), false);
+			}
+			return callback(null, true);
+		},
+		methods: ["GET", "HEAD", "OPTIONS", "POST", "PUT", "DELETE"],
+		preflightContinue: false,
+		optionsSuccessStatus: 204,
 		allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
 		exposedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
 	})
 );
+app.use(function (req, res, next) {
+	// Website you wish to allow to connect
+	res.setHeader("Access-Control-Allow-Origin", "https://vsdbm.hfabio.dev");
+
+	// Request methods you wish to allow
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+
+	// Request headers you wish to allow
+	res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+
+	// Set to true if you need the website to include cookies in the requests sent
+	// to the API (e.g. in case you use sessions)
+	res.setHeader("Access-Control-Allow-Credentials", "true");
+
+	// Pass to next layer of middleware
+	next();
+});
 app.use(express.json());
 
 app.use(epitopeRoutes);
@@ -57,7 +91,18 @@ app.use(virusRoutes);
 
 const io = new Server(server, {
 	cors: {
-		origin: "*",
+		origin: (origin, callback) => {
+			if (!origin) return callback(null, true);
+			if (!allowedOrigins.includes(origin)) {
+				return callback(new Error("Deu cors, irmão"), false);
+			}
+			return callback(null, true);
+		},
+		methods: ["GET", "HEAD", "OPTIONS", "POST", "PUT", "DELETE"],
+		preflightContinue: false,
+		optionsSuccessStatus: 204,
+		allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+		exposedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
 	},
 });
 

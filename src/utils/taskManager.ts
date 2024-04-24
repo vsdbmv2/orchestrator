@@ -8,6 +8,7 @@ import {
 } from "@vsdbmv2/mapping-library/types/@types";
 import { mappingUpdate } from "../controllers/cronController";
 import { v4 as uuid } from "uuid";
+import knex from "../services/database";
 
 export class Work implements IWork {
 	public status: workStatus;
@@ -23,13 +24,22 @@ export class Work implements IWork {
 	next: IWork | undefined;
 	startTime: number;
 	endTime: number;
+	organism: string;
 
-	constructor(type: workType, sequence1: string, id1: number, sequence2: string | string[], id2?: number) {
+	constructor(
+		type: workType,
+		organism: string,
+		sequence1: string,
+		id1: number,
+		sequence2: string | string[],
+		id2?: number
+	) {
 		this.type = type;
 		this.status = "TODO";
 		this.epitopes = [];
 		this.sequence1 = sequence1;
 		this.id1 = id1;
+		this.organism = organism;
 		if (id2) this.id2 = id2;
 		if (type === "global-mapping" || type === "local-mapping") this.sequence2 = sequence2 as string;
 		if (type === "epitope-mapping") this.epitopes = sequence2 as string[];
@@ -64,10 +74,13 @@ export class Work implements IWork {
 class TaskManager {
 	private queue: Work[];
 	private doing: Work[];
+	private isBusy = false;
+	private hashWork: Map<string, true>;
 
 	constructor() {
 		this.queue = [];
 		this.doing = [];
+		this.hashWork = new Map();
 	}
 
 	get size(): number {
@@ -77,13 +90,39 @@ class TaskManager {
 		return this.doing.length;
 	}
 
-	registerWork(type: workType, sequence1: string, id1: number, sequence2: string | string[], id2?: number) {
-		const work = new Work(type, sequence1, id1, sequence2, id2);
+	registerWork(
+		type: workType,
+		organism: string,
+		sequence1: string,
+		id1: number,
+		sequence2: string | string[],
+		id2?: number
+	) {
+		if (this.hashWork.has(`${type}_${id1}_${id2 ?? organism}`)) return;
+		const work = new Work(type, organism, sequence1, id1, sequence2, id2);
 		this.queue.push(work);
+		this.hashWork.set(`${type}_${id1}_${id2 ?? organism}`, true);
 	}
 
-	getWork(worker_id: string, worksAmount: number): Work[] {
-		const works: Work[] = this.queue.splice(0, worksAmount);
+	async addWorkHashMap(type: string, id1: number, id2: number | string) {
+		this.hashWork.set(`${type}_${id1}_${id2}`, true);
+	}
+	async removeWorkHashMap(type: string, id1: number, id2: number | string) {
+		this.hashWork.delete(`${type}_${id1}_${id2}`);
+	}
+	async clearWorkHashMap() {
+		this.hashWork.clear();
+	}
+
+	async getWork(worker_id: string, worksAmount: number): Promise<Work[]> {
+		while (this.isBusy) {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+		}
+		this.isBusy = true;
+		const works: Work[] = [];
+		while (works.length < worksAmount && this.queue.length) {
+			works.push(this.queue.pop() as Work);
+		}
 		if (works.length > 0) {
 			works.forEach((work: Work) => {
 				work.workerId = worker_id;
@@ -91,6 +130,7 @@ class TaskManager {
 			});
 			this.doing.push(...works);
 		}
+		this.isBusy = false;
 		return works;
 	}
 
@@ -98,7 +138,7 @@ class TaskManager {
 		const works: Work[] = this.doing.filter((work: Work) => work.workerId === worker_id);
 		this.doing = this.doing.filter((work: Work) => work.workerId !== worker_id);
 		if (works.length > 0) {
-			this.queue.push(...works);
+			this.queue.push(...works.map((work: Work) => ({ ...work, status: "TODO" } as Work)));
 		}
 	}
 
@@ -107,38 +147,86 @@ class TaskManager {
 		//aqui finaliza uma task removendo ela do doing e salvando o resultado (pode alocar algo pra análise ou sei la)
 		//const work: Work | undefined = this.doing.find((work: Work) => work.identifier === identifier && work.workerId === identifier);
 		this.doing = this.doing.filter((work: Work) => !ids.includes(work.identifier));
-		finishedWork.forEach((work) => {
-			console.log(`Saving a ${work.type}`);
-			if (!work.payload) return;
+		const organisms = finishedWork
+			.map((work: Work) => work.payload?.organism as string)
+			.filter((organism: string, index: number, arr: string[]) => arr.indexOf(organism) === index);
+		for (const organism of organisms) {
+			const finishedGlobalMapping = finishedWork.filter(
+				(work: Work) => work.type === "global-mapping" && work.payload?.organism === organism
+			);
+			const finishedLocalMapping = finishedWork.filter(
+				(work: Work) => work.type === "local-mapping" && work.payload?.organism === organism
+			);
+			await Promise.all([
+				...(finishedGlobalMapping.length
+					? [
+							knex
+								.withSchema(organism)
+								.table("sequence_map")
+								.insert(
+									finishedGlobalMapping.map((work: Work) => ({
+										idsequence: (work.payload as IPayloadGlobalAlignment).idSequence,
+										map_init: (work.payload as IPayloadGlobalAlignment).map_init,
+										map_end: (work.payload as IPayloadGlobalAlignment).map_end,
+										coverage_pct: (work.payload as IPayloadGlobalAlignment).coverage_pct,
+									}))
+								),
+					  ]
+					: []),
+				...(finishedLocalMapping.length
+					? [
+							knex
+								.withSchema(organism)
+								.table("subtype_reference_sequence")
+								.insert(
+									finishedLocalMapping.map((work: Work) => ({
+										is_refseq: false,
+										idsequence: (work.payload as IPayloadLocalAlignment).idSequence,
+										idsubtype: (work.payload as IPayloadLocalAlignment).idSubtype,
+										subtype_score: (work.payload as IPayloadLocalAlignment).alignment_score,
+									}))
+								),
+					  ]
+					: []),
+			]);
+		}
+		// await Promise.all(
+		// 	finishedWork.map(async (work) => {
+		// 		if (!work.payload) return;
 
-			switch (work.type) {
-				case "global-mapping": {
-					const payload = work.payload as IPayloadGlobalAlignment;
-					console.log(
-						`global alignment score: Map init (${payload.map_init}), Map end: (${payload.map_end}), Coverage: (${payload.coverage_pct}%)`
-					);
-					// salva o mapeamento global (salva direto)
-					break;
-				}
-				case "local-mapping": {
-					const payload = work.payload as IPayloadLocalAlignment;
-					console.log("local alignment score: ", payload.alignment_score);
-					// salva a subtipagem (salva no cache para saber o subtipo com maior grau de similaridade)
-					break;
-				}
-				case "epitope-mapping": {
-					const payload = work.payload as IPayloadEpitopeMap;
-					console.table(payload.epitope_maps);
-					// salva o mapeamento do epitopo (salva no cache para gerar relatório de quantos matchs deu)
-					break;
-				}
-				default: {
-					console.error("Something went wrong with the work, the payload type was incorrect or inexistent");
-					console.table(work);
-					break;
-				}
-			}
-		});
+		// 		switch (work.type) {
+		// 			case "global-mapping": {
+		// 				const payload = work.payload as IPayloadGlobalAlignment;
+		// 				return await knex.withSchema(payload.organism).table("sequence_map").insert({
+		// 					idsequence: payload.idSequence,
+		// 					map_init: payload.map_init,
+		// 					map_end: payload.map_end,
+		// 					coverage_pct: payload.coverage_pct,
+		// 				});
+		// 			}
+		// 			case "local-mapping": {
+		// 				const payload = work.payload as IPayloadLocalAlignment;
+		// 				return await knex.withSchema(payload.organism).table("subtype_reference_sequence").insert({
+		// 					is_refseq: false,
+		// 					idsequence: payload.idSequence,
+		// 					idsubtype: payload.idSubtype,
+		// 					subtype_score: payload.alignment_score,
+		// 				});
+		// 			}
+		// 			case "epitope-mapping": {
+		// 				const payload = work.payload as IPayloadEpitopeMap;
+		// 				console.table(payload.epitope_maps);
+		// 				// salva o mapeamento do epitopo (salva no cache para gerar relatório de quantos matchs deu)
+		// 				break;
+		// 			}
+		// 			default: {
+		// 				console.error("Something went wrong with the work, the payload type was incorrect or inexistent");
+		// 				console.table(work);
+		// 				break;
+		// 			}
+		// 		}
+		// 	})
+		// );
 		if (this.size === 0) await mappingUpdate();
 	}
 }

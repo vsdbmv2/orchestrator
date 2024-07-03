@@ -262,7 +262,6 @@ export const deleteVirus = async (req: Request, res: Response) => {
 export const verifyCreateData = async (_: Response, data: any, organism_name: string) => {
 	if (organism_name.toLowerCase() === "no items found") throw new Error("Please, check your refseq identifier.");
 	if (data.organism_refseq === "") throw new Error("Please, inform an organism RefSeq.");
-	if (data.organism_subtypes.length === 0) throw new Error("Please, inform at least one subtype or genotype.");
 	return true;
 };
 

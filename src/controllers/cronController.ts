@@ -24,26 +24,34 @@ const sequenceDBUpdate = async () => {
 	const viruses = await knex("virus").select();
 	for (const virus of viruses) {
 		await virusController.downloadViralSequenceDatabase(virus);
+		log("[cron-job] - | Finished process | - Sequence Download");
 	}
 };
 
 export const downloadEpitopes = async () => {
 	log("[cron-job] - | Running process | - Epitope download");
 	await epitopeDownloader();
+	log("[cron-job] - | Finished process | - Epitope download");
+};
+
+export const runJobs = async () => {
+	log("[cron-job] - | Running all jobs | - startup");
+	// await sequenceDBUpdate();
+	await mappingUpdate();
+	// await downloadEpitopes();
+	log("[cron-job] - | Finished all jobs | - finished");
 };
 
 export default {
 	async startCronJobs(runJobsNow = false) {
-		//process 1
-		// if (!runJobsNow) mappingUpdate();
-		//6h
-		// cron.schedule("0 */2 * * * *", () => mappingUpdate(), { timezone: "America/Sao_Paulo" });
-		// //24h
-		// cron.schedule("0 */24 * * * *", () => sequenceDBUpdate(), { timezone: "America/Sao_Paulo" });
-		// //process 2
-		// if (!runJobsNow) downloadEpitopes();
-		// //7 dias
-		// cron.schedule("0 0 * */7 * *", () => downloadEpitopes(), { timezone: "America/Sao_Paulo" });
+		runJobs();
+		if (!runJobsNow) return;
+		// 6h
+		cron.schedule("0 */2 * * * *", () => mappingUpdate(), { timezone: "America/Sao_Paulo" });
+		// 24h
+		cron.schedule("0 */24 * * * *", () => sequenceDBUpdate(), { timezone: "America/Sao_Paulo" });
+		// 7 dias
+		cron.schedule("0 0 * */7 * *", () => downloadEpitopes(), { timezone: "America/Sao_Paulo" });
 	},
 	mappingUpdate,
 	sequenceDBUpdate,

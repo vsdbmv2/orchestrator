@@ -134,6 +134,15 @@ class TaskManager {
 		return works;
 	}
 
+	async getWorksLeft() {
+		while (this.isBusy) await new Promise((resolve) => setTimeout(resolve, 100));
+		return this.queue.length;
+	}
+	async getDoingSize() {
+		while (this.isBusy) await new Promise((resolve) => setTimeout(resolve, 100));
+		return this.doing.length;
+	}
+
 	deallocateWork(worker_id: string) {
 		const works: Work[] = this.doing.filter((work: Work) => work.workerId === worker_id);
 		this.doing = this.doing.filter((work: Work) => work.workerId !== worker_id);
@@ -190,43 +199,6 @@ class TaskManager {
 					: []),
 			]);
 		}
-		// await Promise.all(
-		// 	finishedWork.map(async (work) => {
-		// 		if (!work.payload) return;
-
-		// 		switch (work.type) {
-		// 			case "global-mapping": {
-		// 				const payload = work.payload as IPayloadGlobalAlignment;
-		// 				return await knex.withSchema(payload.organism).table("sequence_map").insert({
-		// 					idsequence: payload.idSequence,
-		// 					map_init: payload.map_init,
-		// 					map_end: payload.map_end,
-		// 					coverage_pct: payload.coverage_pct,
-		// 				});
-		// 			}
-		// 			case "local-mapping": {
-		// 				const payload = work.payload as IPayloadLocalAlignment;
-		// 				return await knex.withSchema(payload.organism).table("subtype_reference_sequence").insert({
-		// 					is_refseq: false,
-		// 					idsequence: payload.idSequence,
-		// 					idsubtype: payload.idSubtype,
-		// 					subtype_score: payload.alignment_score,
-		// 				});
-		// 			}
-		// 			case "epitope-mapping": {
-		// 				const payload = work.payload as IPayloadEpitopeMap;
-		// 				console.table(payload.epitope_maps);
-		// 				// salva o mapeamento do epitopo (salva no cache para gerar relatório de quantos matchs deu)
-		// 				break;
-		// 			}
-		// 			default: {
-		// 				console.error("Something went wrong with the work, the payload type was incorrect or inexistent");
-		// 				console.table(work);
-		// 				break;
-		// 			}
-		// 		}
-		// 	})
-		// );
 		if (this.size === 0) await mappingUpdate();
 	}
 }

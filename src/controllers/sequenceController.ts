@@ -3,9 +3,78 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import knex from "../services/database";
 import taskManager from "../utils/taskManager";
-import { getMemoryUsage, log } from "../utils/helpers";
+import { hasReachedMaxMemory, log } from "../utils/helpers";
 
 dotenv.config();
+
+type idSequenceArray = { id: number; sequence: string }[];
+
+const scheduleLocalMappingWorks = async (virus: IVirus) => {
+	if (hasReachedMaxMemory()) return log(`local alignment not scheduled for ${virus.name} due to memory available`);
+	log("scheduling local alignment mapping", virus.name);
+	const [subtypes, sequences, already_mapped] = await Promise.all([
+		knex
+			.withSchema(virus.database_name)
+			.table("subtype")
+			.select("subtype.id", "sequence.sequence")
+			.join("subtype_reference_sequence", "subtype.id", "subtype_reference_sequence.idsubtype")
+			.join("sequence", "sequence.id", "subtype_reference_sequence.idsequence")
+			.where("subtype_reference_sequence.is_refseq", "=", 1),
+		knex.withSchema(virus.database_name).table("sequence").select("id", "sequence"),
+		knex.withSchema(virus.database_name).table("subtype_reference_sequence").select("*").where("is_refseq", "=", 0),
+	]);
+	log(`${sequences.length} sequences and ${subtypes.length} subtype sequences to align`, virus.name);
+	for (const { idsubtype, idsequence } of already_mapped) {
+		taskManager.addWorkHashMap("local-mapping", idsequence, idsubtype);
+	}
+	for (const sequence of sequences) {
+		if (hasReachedMaxMemory()) break;
+		for (const subtype of subtypes) {
+			if (!sequence.sequence.length || !subtype.sequence.length) continue;
+			taskManager.registerWork(
+				"local-mapping",
+				virus.database_name,
+				sequence.sequence,
+				sequence.id,
+				subtype.sequence,
+				subtype.id
+			);
+		}
+	}
+	sequences.length = 0;
+	subtypes.length = 0;
+	taskManager.clearWorkHashMap();
+	log(`${taskManager.size} local alignments registered successfully`, virus.name);
+};
+const scheduleGlobalMappingWorks = async (virus: IVirus) => {
+	if (hasReachedMaxMemory()) return log(`global alignment not scheduled for ${virus.name} due to memory available`);
+	log("scheduling global alignment mapping", virus.name);
+	const sequences = (await knex
+		.withSchema(virus.database_name)
+		.table("sequence")
+		.leftOuterJoin("sequence_map", "sequence.id", "sequence_map.idsequence")
+		.select("sequence.id", "sequence.sequence")) as idSequenceArray;
+
+	log("sequences to align", virus.name);
+	if (sequences.length === 1) return log("all sequences are already mapped globally", virus.name);
+	const [refSeq, ...alignSequences] = sequences;
+	for (const sequence of alignSequences) {
+		if (hasReachedMaxMemory()) break;
+		if (!sequence.sequence.length || !refSeq.sequence.length) continue;
+		taskManager.registerWork(
+			"global-mapping",
+			virus.database_name,
+			sequence.sequence,
+			sequence.id,
+			refSeq.sequence,
+			refSeq.id
+		);
+	}
+	sequences.length = 0;
+	alignSequences.length = 0;
+	taskManager.clearWorkHashMap();
+	log(`${taskManager.size} global alignments registered successfully`, virus.name);
+};
 
 export default {
 	async getCountSubtypeGeneral(req: Request, res: Response) {
@@ -113,41 +182,11 @@ export default {
 			.groupBy("country_name");
 		return res.send({ status: "success", data });
 	},
+
 	async scheduleMappingWorks(virus: IVirus) {
-		if (getMemoryUsage().rss > 2 * 1024) return;
-		log("scheduling local alignment mapping", virus.name);
-		const [sequences, subtypes, already_mapped] = await Promise.all([
-			knex.withSchema(virus.database_name).table("sequence").select("id", "sequence"),
-			knex
-				.withSchema(virus.database_name)
-				.table("subtype")
-				.select("subtype.id", "sequence.sequence")
-				.join("subtype_reference_sequence", "subtype.id", "subtype_reference_sequence.idsubtype")
-				.join("sequence", "sequence.id", "subtype_reference_sequence.idsequence")
-				.where("subtype_reference_sequence.is_refseq", "=", 1),
-			knex.withSchema(virus.database_name).table("subtype_reference_sequence").select("*").where("is_refseq", "=", 0),
-		]);
-		log(`${sequences.length} sequences and ${subtypes.length} subtype sequences to align`, virus.name);
-		for (const { idsubtype, idsequence } of already_mapped) {
-			taskManager.addWorkHashMap("local-mapping", idsequence, idsubtype);
-		}
-		for (const sequence of sequences) {
-			if (getMemoryUsage().rss > 3 * 1024) break;
-			for (const subtype of subtypes) {
-				if (!sequence.sequence.length || !subtype.sequence.length) continue;
-				taskManager.registerWork(
-					"local-mapping",
-					virus.database_name,
-					sequence.sequence,
-					sequence.id,
-					subtype.sequence,
-					subtype.id
-				);
-			}
-		}
-		sequences.length = 0;
-		subtypes.length = 0;
-		taskManager.clearWorkHashMap();
-		log(`${taskManager.size} local alignments registered successfully`, virus.name);
+		if (hasReachedMaxMemory()) return log(`local alignment not scheduled for ${virus.name} due to memory available`);
+		await scheduleGlobalMappingWorks(virus);
+		if (hasReachedMaxMemory()) return;
+		await scheduleLocalMappingWorks(virus);
 	},
 };

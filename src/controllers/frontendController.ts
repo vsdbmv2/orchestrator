@@ -209,7 +209,7 @@ const mapNewEpitope = async (database_name: string, linearSequence: string) => {
 		// 'sequence.sequence',
 	];
 
-	let hits = await knex
+	let hits: { id: number; hits: number }[] = await knex
 		.withSchema(database_name)
 		.table("feature_qualifier")
 		.whereRaw("?? = 'peptide' or ?? = 'translation'", ["feature_qualifier.name", "feature_qualifier.name"])

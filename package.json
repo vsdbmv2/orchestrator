@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "nodemon --watch 'src/' --exec 'ts-node ./src/server.ts' -e ts",
+    "dev": "nodemon ./src/server.ts",
     "dev2": "node --env-file=.env --import=tsx --watch ./src/server.ts",
     "dev:test:subtype": "nodemon --exec 'ts-node test-get-subtype.ts' -e ts",
     "start": "node dist/server.js",
@@ -19,16 +19,16 @@
   "author": "Helton Fabio",
   "license": "ISC",
   "dependencies": {
-    "@vsdbmv2/mapping-library": "0.0.72",
+    "@vsdbmv2/mapping-library": "^0.0.76",
     "axios": "^0.21.4",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.18.2",
     "jsdom": "^17.0.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.95.11",
+    "knex": "^3.1.0",
     "md5": "^2.3.0",
-    "mysql2": "^2.3.0",
+    "mysql2": "^3.10.2",
     "node-cron": "^3.0.0",
     "restify-router": "^0.6.2",
     "sha1": "^1.1.1",

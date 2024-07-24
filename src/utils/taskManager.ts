@@ -5,7 +5,7 @@ import {
 	IWork,
 	workStatus,
 	workType,
-} from "@vsdbmv2/mapping-library/types/@types";
+} from "@vsdbmv2/mapping-library";
 import { mappingUpdate } from "../controllers/cronController";
 import { v4 as uuid } from "uuid";
 import knex from "../services/database";

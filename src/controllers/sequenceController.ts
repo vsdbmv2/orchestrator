@@ -49,15 +49,21 @@ const scheduleLocalMappingWorks = async (virus: IVirus) => {
 const scheduleGlobalMappingWorks = async (virus: IVirus) => {
 	if (hasReachedMaxMemory()) return log(`global alignment not scheduled for ${virus.name} due to memory available`);
 	log("scheduling global alignment mapping", virus.name);
-	const sequences = (await knex
+	const refSeq = await knex
 		.withSchema(virus.database_name)
 		.table("sequence")
-		.leftOuterJoin("sequence_map", "sequence.id", "sequence_map.idsequence")
-		.select("sequence.id", "sequence.sequence")) as idSequenceArray;
+		.where({ accession_version: virus.reference_accession })
+		.first();
+
+	const alignSequences: idSequenceArray = await knex
+		.withSchema(virus.database_name)
+		.table("sequence")
+		.select("sequence.id", "sequence.sequence")
+		.whereNotIn("id", knex.withSchema(virus.database_name).table("sequence_map").distinct("idsequence"))
+		.andWhereNot("id", refSeq.id);
 
 	log("sequences to align", virus.name);
-	if (sequences.length === 1) return log("all sequences are already mapped globally", virus.name);
-	const [refSeq, ...alignSequences] = sequences;
+	if (!alignSequences.length) return log("all sequences are already mapped globally", virus.name);
 	for (const sequence of alignSequences) {
 		if (hasReachedMaxMemory()) break;
 		if (!sequence.sequence.length || !refSeq.sequence.length) continue;
@@ -70,7 +76,6 @@ const scheduleGlobalMappingWorks = async (virus: IVirus) => {
 			refSeq.id
 		);
 	}
-	sequences.length = 0;
 	alignSequences.length = 0;
 	taskManager.clearWorkHashMap();
 	log(`${taskManager.size} global alignments registered successfully`, virus.name);

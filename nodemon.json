@@ -1,8 +1,23 @@
 {
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "src/database/"
+  ],
   "verbose": true,
-  "ignore": ["*.test.js", "fixtures/*", "dist/*"],
   "execMap": {
-    "rb": "ruby",
-    "pde": "processing --sketch={{pwd}} --run"
-  }
+    "js": "node --harmony",
+    "ts": "ts-node"
+  },
+  "events": {
+    "restart": "echo 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+  },
+  "watch": [
+    "src/"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "ts,js"
 }

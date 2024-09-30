@@ -12,7 +12,7 @@ export const getMemoryUsage = () => {
 };
 
 export const maxMemory = +(process.env.MAX_MEMORY ?? 2) * 1024;
-export const hasReachedMaxMemory = () => getMemoryUsage().rss > 2 * 1024;
+export const hasReachedMaxMemory = () => getMemoryUsage().rss > 16 * 1024;
 
 export const log = (message: string, virus?: string) => {
 	if (message[0] !== "[") {

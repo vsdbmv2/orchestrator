@@ -3,7 +3,7 @@ import knexLocal from "knex";
 import dotenv from "dotenv";
 dotenv.config();
 
-import { IVirus, IFeatureQualifier } from "../@types";
+import { IVirus, IFeatureQualifier, IViralSequence } from "../@types";
 import knex from "../services/database";
 import axios from "axios";
 import { JSDOM } from "jsdom";
@@ -318,11 +318,59 @@ export const acquireAndSaveSequence = async (
 	}
 };
 
+const downloadAndStoreMultipleSequences = async (
+	virus: IVirus,
+	gis: string,
+	retries = 0
+): Promise<Array<number> | undefined> => {
+	try {
+		log("Downloading: " + gis, virus.name);
+		const raw_sequence = (await ncbi_utils.downloadSingleSequenceFromGi(gis))?.INSDSet?.INSDSeq;
+		const sequences_parsed = (Array.isArray(raw_sequence) ? raw_sequence : [raw_sequence])
+			.map((raw_sequence) => ncbi_utils.modulateFromINSDSeqToVSDBMSeq(raw_sequence))
+			.filter(Boolean) as Array<IViralSequence>;
+		//@ts-ignore
+		const sequences = sequences_parsed.map(({ features: _, ...sequence }) => sequence);
+		//first save the sequence itself and then get the id
+		const id_sequences = await Promise.all(
+			sequences.map(
+				async (sequence) => (await knex.withSchema(virus.database_name).table("sequence").insert(sequence))[0]
+			)
+		);
+		await Promise.all(
+			sequences_parsed.map(async (sequence_parsed, index) => {
+				for (const feature_qualifiers of sequence_parsed.features as any[]) {
+					feature_qualifiers.idsequence = id_sequences[index];
+					const feature = { ...feature_qualifiers };
+					if ("qualifiers" in feature) delete feature.qualifiers;
+
+					const id_feature = await knex.withSchema(virus.database_name).table("sequence_feature").insert(feature);
+					const qualifiers = feature_qualifiers.qualifiers.map((element: IFeatureQualifier) => ({
+						...element,
+						idsequence_feature: id_feature,
+					}));
+					if (qualifiers.length) {
+						await knex.withSchema(virus.database_name).table("feature_qualifier").insert(qualifiers);
+					}
+				}
+			})
+		);
+		return id_sequences;
+	} catch (error) {
+		if (retries < 10) {
+			await new Promise((resolve) => setTimeout(resolve, 2000));
+			return await downloadAndStoreMultipleSequences(virus, gis, retries + 1);
+		}
+		log(`error downloading sequence ${gis}`, virus.name);
+	}
+};
 const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries = 0): Promise<number | undefined> => {
+	let raw_sequence;
+	let sequence_parsed;
 	try {
 		log("Downloading: " + gi, virus.name);
-		const raw_sequence = (await ncbi_utils.downloadSingleSequenceFromGi(gi))?.INSDSet?.INSDSeq;
-		const sequence_parsed = await ncbi_utils.modulateFromINSDSeqToVSDBMSeq(raw_sequence);
+		raw_sequence = (await ncbi_utils.downloadSingleSequenceFromGi(gi))?.INSDSet?.INSDSeq;
+		sequence_parsed = ncbi_utils.modulateFromINSDSeqToVSDBMSeq(raw_sequence);
 		if (!sequence_parsed) throw new Error(`Sequence not found for gi ${gi}`);
 		const sequence = { ...sequence_parsed };
 		if ("features" in sequence) delete sequence.features;
@@ -344,19 +392,22 @@ const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries
 		}
 		return id_sequence;
 	} catch (error) {
-		if (retries < 10) {
+		if (retries < 10 && !(error as Error).message.includes("Type error")) {
 			await new Promise((resolve) => setTimeout(resolve, 2000));
 			return await downloadAndStoreSingleSequence(virus, gi, retries + 1);
 		}
 		log(`error downloading sequence ${gi}`, virus.name);
+		if (retries < 10 && !(error as Error).message.includes("Type error"))
+			log(`Error downloading [${gi}] ${(error as Error).message}`, virus.name);
 	}
 };
 
 export const downloadViralSequenceDatabase = async (virus: IVirus) => {
 	try {
-		await verifySubtypes(virus);
+		// await verifySubtypes(virus);
 		log("Downloading organism info...", virus.name);
 		const ncbi_gis = await ncbi_utils.getGiListFromOrganismName(virus.name);
+		// const ncbi_gis = await ncbi_utils.getGiList(virus.name);
 		if (ncbi_gis?.esearchresult?.idlist?.length) {
 			log(`Found ${ncbi_gis?.esearchresult?.count} sequences on NCBI.`, virus.name);
 			log("Working on diffList...", virus.name);
@@ -366,12 +417,19 @@ export const downloadViralSequenceDatabase = async (virus: IVirus) => {
 				databaseGis.set(gi, true);
 			}
 			const final_gis: string[] = ncbi_gis.esearchresult.idlist.filter((gi: string) => !databaseGis.has(gi));
+			databaseGis.clear();
 			log(`DiffList contains ${final_gis.length} sequences.`, virus.name);
 			if (final_gis.length > 0) {
 				log("Starting sequence download...", virus.name);
-				const chunks = hashMapFunctions.toChunkArray(final_gis, 4);
-				for (const chunk of chunks) {
-					await Promise.all(chunk.map((gi: string) => downloadAndStoreSingleSequence(virus, gi)));
+				const chunks = hashMapFunctions.toChunkArray(final_gis, 5);
+				// for (const chunk of chunks) {
+				// 	await Promise.all(chunk.map((gi: string) => downloadAndStoreSingleSequence(virus, gi)));
+				// }
+				while (chunks.length) {
+					const chunk = chunks.shift() as string[];
+					// await downloadAndStoreSingleSequence(virus, chunk.join(","));
+					// await downloadAndStoreMultipleSequences(virus, chunk.join(","));
+					await Promise.allSettled(chunk.map((gi: string) => downloadAndStoreSingleSequence(virus, gi)));
 				}
 
 				log("All sequences downloaded.", virus.name);

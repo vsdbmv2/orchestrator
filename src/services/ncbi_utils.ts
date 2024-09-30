@@ -104,7 +104,7 @@ export default {
 		}
 	},
 
-	async modulateFromINSDSeqToVSDBMSeq(INSDSeq: IINSDSeq) {
+	modulateFromINSDSeqToVSDBMSeq(INSDSeq: IINSDSeq) {
 		if (!INSDSeq) return;
 		const getGi = () => {
 			const seqId = INSDSeq["INSDSeq_other-seqids"]?.INSDSeqid;
@@ -129,7 +129,13 @@ export default {
 			moltype: INSDSeq.INSDSeq_moltype,
 			topology: INSDSeq.INSDSeq_topology,
 			taxonomy: INSDSeq.INSDSeq_taxonomy,
-			country: INSDSeq.INSDSeq_country || "",
+			country:
+				INSDSeq.INSDSeq_country ||
+				INSDSeq?.["INSDSeq_feature-table"]?.INSDFeature?.find?.(
+					(feature: any) => feature?.INSDFeature_key === "source"
+				)?.INSDFeature_quals?.INSDQualifier?.find?.((qual: any) => qual?.INSDQualifier_name === "geo_loc_name")
+					?.INSDQualifier_value ||
+				"",
 			creationDate: (() => {
 				const twoDigits = (d: number) => {
 					if (0 <= d && d < 10) return "0" + d.toString();
@@ -273,9 +279,11 @@ export default {
 	},
 
 	async getGiListFromOrganismName(term: string, retries = 0): Promise<EsearchResult> {
+		// const params = { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey, retmax: 10000000 } //10kk max
+		const params = { db: "nuccore", term: term, retmode: "json", api_key: apiKey, retmax: 10000000 }; //10kk max
 		try {
 			let response = await axios.get<EsearchResult>(eSearchUrl as string, {
-				params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey, retmax: 10000000 }, //10kk max
+				params,
 				headers: {
 					"content-type": "application/json",
 				},
@@ -288,7 +296,8 @@ export default {
 				await new Promise((resolve) => setTimeout(resolve, 2000));
 				const ids = [];
 				response = await axios.get<EsearchResult>(eSearchUrl as string, {
-					params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey }, //10kk max
+					// params: { db: "nuccore", term: term, retmode: "json", field: "Organism", api_key: apiKey }, //10kk max
+					params: { db: "nuccore", term: term, retmode: "json", api_key: apiKey }, //10kk max
 					headers: {
 						"content-type": "application/json",
 					},
@@ -307,7 +316,7 @@ export default {
 									db: "nuccore",
 									term: term,
 									retmode: "json",
-									field: "Organism",
+									// field: "Organism",
 									api_key: apiKey,
 									retmax: 100000,
 									retstart: localCount,

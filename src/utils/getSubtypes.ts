@@ -105,7 +105,9 @@ export const getSubtypes = async (ncbi_id: number | string) => {
 	// strains = strains.filter((e) => /(geno|sub)type|strain/gi.test(e.name)).sort((a, b) => a.name.localeCompare(b.name));
 	const result: { [key: string]: strain } = {};
 	const strainChunks = toChunkArray(strains, 5);
+	let count = 1;
 	for (const chunk of strainChunks) {
+		console.log(`getting subtypes taxonomy ids: ${count++} of ${strainChunks.length}`);
 		const taxonomy_ids = await Promise.all(chunk.map(({ url }) => getTaxonomyIdFromPage(baseURL + url)));
 		for (const [index, taxonomy_id] of taxonomy_ids.entries()) {
 			if (!taxonomy_id) continue;

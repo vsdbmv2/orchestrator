@@ -6,7 +6,7 @@ import sequenceController from "./sequenceController";
 import { log } from "../utils/helpers";
 
 export const mappingUpdate = async () => {
-	const viruses = await knex("virus").select();
+	const viruses = await knex("virus").select().where({ id: 41 });
 	for (const virus of viruses) {
 		await sequenceController.scheduleMappingWorks(virus);
 	}
@@ -21,11 +21,11 @@ export const mappingUpdate = async () => {
 
 const sequenceDBUpdate = async () => {
 	log("[cron-job] - | Running process | - Sequence Download");
-	const viruses = await knex("virus").select();
+	const viruses = await knex("virus").select().where({ id: 41 });
 	for (const virus of viruses) {
 		await virusController.downloadViralSequenceDatabase(virus);
-		log("[cron-job] - | Finished process | - Sequence Download");
 	}
+	log("[cron-job] - | Finished process | - Sequence Download");
 };
 
 export const downloadEpitopes = async () => {

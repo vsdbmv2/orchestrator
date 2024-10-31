@@ -15,6 +15,7 @@ export class Work implements IWork {
 	public type;
 	public id1: number;
 	public id2?: number;
+	public idSubtype?: number | undefined;
 	public sequence1: string;
 	public sequence2?: string;
 	public epitopes: string[];
@@ -32,7 +33,8 @@ export class Work implements IWork {
 		sequence1: string,
 		id1: number,
 		sequence2: string | string[],
-		id2?: number
+		id2?: number,
+		idSubtype?: number
 	) {
 		this.type = type;
 		this.status = "TODO";
@@ -41,6 +43,7 @@ export class Work implements IWork {
 		this.id1 = id1;
 		this.organism = organism;
 		if (id2) this.id2 = id2;
+		if (idSubtype) this.idSubtype = idSubtype;
 		if (type === "global-mapping" || type === "local-mapping") this.sequence2 = sequence2 as string;
 		if (type === "epitope-mapping") this.epitopes = sequence2 as string[];
 		this.identifier = uuid();
@@ -75,12 +78,19 @@ class TaskManager {
 	private queue: Work[];
 	private doing: Work[];
 	private isBusy = false;
-	private hashWork: Map<string, true>;
+	private hashWork: Set<string>;
+	private worksTypeDoing: {
+		[key: string]: number;
+	} = {
+		"global-mapping": 0,
+		"local-mapping": 0,
+		"epitope-mapping": 0,
+	};
 
 	constructor() {
 		this.queue = [];
 		this.doing = [];
-		this.hashWork = new Map();
+		this.hashWork = new Set();
 	}
 
 	get size(): number {
@@ -96,22 +106,29 @@ class TaskManager {
 		sequence1: string,
 		id1: number,
 		sequence2: string | string[],
-		id2?: number
+		id2?: number,
+		idSubtype?: number
 	) {
-		if (this.hashWork.has(`${type}_${id1}_${id2 ?? organism}`)) return;
-		const work = new Work(type, organism, sequence1, id1, sequence2, id2);
+		let key = `${organism}_${type}_${id1}_${id2}`;
+		if (idSubtype) key += `_${idSubtype}`;
+		if (this.hashWork.has(key)) return;
+		const work = new Work(type, organism, sequence1, id1, sequence2, id2, idSubtype);
 		this.queue.push(work);
-		this.hashWork.set(`${type}_${id1}_${id2 ?? organism}`, true);
+		this.hashWork.add(key);
+		this.worksTypeDoing[type]++;
 	}
 
-	async addWorkHashMap(type: string, id1: number, id2: number | string) {
-		this.hashWork.set(`${type}_${id1}_${id2}`, true);
+	async addWorkHashMap(organism: string, type: string, id1: number, id2: number | string, idSubtype?: number) {
+		this.hashWork.add(`${organism}_${type}_${id1}_${id2}${idSubtype ? `_${idSubtype}` : ""}`);
+		this.worksTypeDoing[type]++;
 	}
-	async removeWorkHashMap(type: string, id1: number, id2: number | string) {
-		this.hashWork.delete(`${type}_${id1}_${id2}`);
+	async removeWorkHashMap(organism: string, type: string, id1: number, id2: number | string, idSubtype?: number) {
+		this.hashWork.delete(`${organism}_${type}_${id1}_${id2}${idSubtype ? `_${idSubtype}` : ""}`);
+		this.worksTypeDoing[type]--;
 	}
 	async clearWorkHashMap() {
 		this.hashWork.clear();
+		Object.keys(this.worksTypeDoing).forEach((key) => (this.worksTypeDoing[key] = 0));
 	}
 
 	async getWork(worker_id: string, worksAmount: number): Promise<Work[]> {
@@ -142,19 +159,26 @@ class TaskManager {
 		while (this.isBusy) await new Promise((resolve) => setTimeout(resolve, 100));
 		return this.doing.length;
 	}
+	async getWorkDoingSize(type: workType) {
+		while (this.isBusy) await new Promise((resolve) => setTimeout(resolve, 100));
+		return this.worksTypeDoing[type];
+	}
 
 	deallocateWork(worker_id: string) {
 		const works: Work[] = this.doing.filter((work: Work) => work.workerId === worker_id);
 		this.doing = this.doing.filter((work: Work) => work.workerId !== worker_id);
 		if (works.length > 0) {
 			this.queue.push(...works.map((work: Work) => ({ ...work, status: "TODO" } as Work)));
+			works.forEach((work) => this.worksTypeDoing[work.type]--);
 		}
 	}
 
 	async finishWork(finishedWork: Work[]) {
 		const ids = finishedWork.map((work: Work) => work.identifier);
-		//aqui finaliza uma task removendo ela do doing e salvando o resultado (pode alocar algo pra análise ou sei la)
-		//const work: Work | undefined = this.doing.find((work: Work) => work.identifier === identifier && work.workerId === identifier);
+
+		// TODO: BULK INSERT LOGIC
+		// finishedWork.forEach((work) => this.worksTypeDoing[work.type]--);
+
 		this.doing = this.doing.filter((work: Work) => !ids.includes(work.identifier));
 		const organisms = finishedWork
 			.map((work: Work) => work.payload?.organism as string)
@@ -191,6 +215,7 @@ class TaskManager {
 									finishedLocalMapping.map((work: Work) => ({
 										is_refseq: false,
 										idsequence: (work.payload as IPayloadLocalAlignment).idSequence,
+										idsequencesubtype: (work.payload as IPayloadLocalAlignment).idSequenceSubtype,
 										idsubtype: (work.payload as IPayloadLocalAlignment).idSubtype,
 										subtype_score: (work.payload as IPayloadLocalAlignment).alignment_score,
 									}))

@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import knex from "../services/database";
 import taskManager from "../utils/taskManager";
-import { hasReachedMaxMemory, log } from "../utils/helpers";
+import { getMemoryUsage, hasReachedMaxMemory, log } from "../utils/helpers";
 
 dotenv.config();
 
@@ -12,38 +12,67 @@ type idSequenceArray = { id: number; sequence: string }[];
 const scheduleLocalMappingWorks = async (virus: IVirus) => {
 	if (hasReachedMaxMemory()) return log(`local alignment not scheduled for ${virus.name} due to memory available`);
 	log("scheduling local alignment mapping", virus.name);
-	const [subtypes, sequences, already_mapped] = await Promise.all([
-		knex
-			.withSchema(virus.database_name)
-			.table("subtype")
-			.select("subtype.id", "sequence.sequence")
-			.join("subtype_reference_sequence", "subtype.id", "subtype_reference_sequence.idsubtype")
-			.join("sequence", "sequence.id", "subtype_reference_sequence.idsequence")
-			.where("subtype_reference_sequence.is_refseq", "=", 1),
-		knex.withSchema(virus.database_name).table("sequence").select("id", "sequence"),
-		knex.withSchema(virus.database_name).table("subtype_reference_sequence").select("*").where("is_refseq", "=", 0),
-	]);
-	log(`${sequences.length} sequences and ${subtypes.length} subtype sequences to align`, virus.name);
-	for (const { idsubtype, idsequence } of already_mapped) {
-		taskManager.addWorkHashMap("local-mapping", idsequence, idsubtype);
-	}
-	for (const sequence of sequences) {
-		if (hasReachedMaxMemory()) break;
-		for (const subtype of subtypes) {
-			if (!sequence.sequence.length || !subtype.sequence.length) continue;
+	const maxAlignmentsPerTime = 1_000_000;
+
+	const alignmentsMissing: Array<{
+		id: number;
+		id_subtype: number;
+		id_sequence_subtype: number;
+		sequence: string;
+		subtype_sequence: string;
+	}> = await knex
+		.withSchema(virus.database_name)
+		.table("sequence as s")
+		.join(knex.raw(`\`${virus.database_name}\`.\`subtype\` as sub`))
+		.join("subtype_reference_sequence as ref", "sub.id", "ref.idsubtype")
+		.join("sequence as seq", "seq.id", "ref.idsequence")
+		.select({
+			id: "s.id",
+			id_sequence_subtype: "seq.id",
+			id_subtype: "sub.id",
+			sequence: "s.sequence",
+			subtype_sequence: "seq.sequence",
+		})
+		.where("s.id", "!=", "seq.id")
+		.andWhere(
+			knex.raw(`
+			concat(s.id, '-', sub.id) not in (
+    		SELECT concat(idsequence, '-', idsubtype) as hash FROM ${virus.database_name}.subtype_reference_sequence
+    	)`)
+		)
+		// .groupByRaw("concat(s.id, '-', sub.id)")
+		.limit(maxAlignmentsPerTime);
+
+	log(`${alignmentsMissing.length} alignments missing`, virus.name);
+	if (!alignmentsMissing.length) return;
+
+	while (alignmentsMissing.length) {
+		const itHasReachedMaxMemory = hasReachedMaxMemory();
+		const sub = alignmentsMissing.splice(alignmentsMissing.length - 10, alignmentsMissing.length);
+		if (itHasReachedMaxMemory) {
+			console.log({ itHasReachedMaxMemory, memory: getMemoryUsage().rss });
+			break;
+		}
+		for (const sequences of sub) {
+			if (!sequences || !sequences.sequence.length || !sequences.subtype_sequence.length) continue;
 			taskManager.registerWork(
 				"local-mapping",
 				virus.database_name,
-				sequence.sequence,
-				sequence.id,
-				subtype.sequence,
-				subtype.id
+				sequences.sequence,
+				sequences.id,
+				sequences.subtype_sequence,
+				sequences.id_sequence_subtype,
+				sequences.id_subtype
 			);
 		}
 	}
-	sequences.length = 0;
-	subtypes.length = 0;
-	taskManager.clearWorkHashMap();
+	alignmentsMissing.length = 0;
+	console.log({
+		itHasReachedMaxMemory: hasReachedMaxMemory(),
+		memory: getMemoryUsage().rss,
+		alignmentsMissing: alignmentsMissing.length,
+	});
+	// if (gc) gc();
 	log(`${taskManager.size} local alignments registered successfully`, virus.name);
 };
 const scheduleGlobalMappingWorks = async (virus: IVirus) => {
@@ -190,8 +219,11 @@ export default {
 
 	async scheduleMappingWorks(virus: IVirus) {
 		if (hasReachedMaxMemory()) return log(`local alignment not scheduled for ${virus.name} due to memory available`);
-		await scheduleGlobalMappingWorks(virus);
+		// await scheduleGlobalMappingWorks(virus);
 		if (hasReachedMaxMemory()) return;
 		await scheduleLocalMappingWorks(virus);
+		// await knex.withSchema(virus.database_name).table("subtype_reference_sequence").truncate();
+		// console.log("truncou saporra as ", new Date().toLocaleString());
+		// process.exit(0);
 	},
 };

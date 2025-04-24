@@ -7,10 +7,15 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "nodemon ./src/server.ts",
-    "dev2": "node --env-file=.env --import=tsx --watch ./src/server.ts",
+    "dev": "npm run migrate && node --env-file=.env --import=tsx --watch ./src/server.ts",
+    "premigrate": "node --import=tsx --env-file=.env ./src/database/createSchema.ts",
+    "db:setup": "npm run migrate && npm run seed",
+    "migrate": "knex migrate:latest --knexfile ./knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile ./knexfile.ts",
+    "seed": "knex seed:run --knexfile ./knexfile.ts",
+    "seed:rollback": "knex seed:rollback --knexfile ./knexfile.ts",
     "dev:test:subtype": "nodemon --exec 'ts-node test-get-subtype.ts' -e ts",
-    "start": "node dist/server.js",
+    "start": "npm run migrate && node dist/server.js",
     "copyDownloader": "cp ./src/utils/DownloadAndUnpackIEDB.sh ./dist/utils",
     "build": "rm -rf dist 2> /dev/null && babel --extensions '.ts' src --out-dir dist && yarn copyDownloader && echo 'Build orchestrator successfully'",
     "lint": "eslint .",

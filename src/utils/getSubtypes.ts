@@ -15,7 +15,6 @@ const apiBaseURL = process.env.NCBI_API_BASE_URL || "https://api.ncbi.nlm.nih.go
 
 export const getPage = async (ncbi_id: number | string) => {
 	const data = await fetch(`${baseURL}/Taxonomy/Browser/wwwtax.cgi?id=${ncbi_id}`).then((value) => value.text());
-	// const data = (await axios.get(`${baseURL}/Taxonomy/Browser/wwwtax.cgi?id=${ncbi_id}`)).data as string;
 	return new JSDOM(data).window.document;
 };
 export const getTaxonomyIdFromPage = async (url: string, retries = 0): Promise<string | undefined> => {
@@ -122,18 +121,19 @@ export const getAssemblyGenomeRefseqs = async (
 	filters += "&page_size=10000";
 
 	const url = `${apiBaseURL}genome/taxon/${ncbi_ids_or_organisms_names.join("%2C")}${filters}`;
-	const test = await fetch(url)
+	const response = await fetch(url)
 		.then((r) => r.json())
 		.catch((reason) => {
 			console.error(reason);
 		});
 	const result: { [key: string]: any } = {};
 	ncbi_ids_or_organisms_names.forEach((id) => {
-		const data = test?.reports?.filter(({ organism }: { organism: { tax_id: number } }) => +organism?.tax_id === +id);
+		const data = response?.reports?.filter(
+			({ organism }: { organism: { tax_id: number } }) => +organism?.tax_id === +id
+		);
 		if (data.length) result[id] = data;
 	});
 	return result;
-	// return Promise.all(ncbi_ids.map(async (id) => getRefseq(id)));
 };
 export const getRefseqs = async (taxonomy_ids: string[] | number[]): Promise<{ [key: string]: Array<any> }> => {
 	let filters = "/dataset_report?";
@@ -169,7 +169,6 @@ export const getRefseqs = async (taxonomy_ids: string[] | number[]): Promise<{ [
 		}
 	}
 	return result;
-	// return Promise.all(ncbi_ids.map(async (id) => getRefseq(id)));
 };
 
 export const getSubtypes = async (ncbi_id: number | string) => {

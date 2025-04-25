@@ -36,9 +36,9 @@ export const downloadEpitopes = async () => {
 
 export const runJobs = async () => {
 	log("[cron-job] - | Running all jobs | - startup");
-	// await sequenceDBUpdate();
+	await sequenceDBUpdate();
 	await mappingUpdate();
-	// await downloadEpitopes();
+	await downloadEpitopes();
 	log("[cron-job] - | Finished all jobs | - finished");
 };
 

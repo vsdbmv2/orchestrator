@@ -254,6 +254,8 @@ DROP TABLE IF EXISTS `viral_model`.`subtype`;
 CREATE TABLE `viral_model`.`subtype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text COLLATE utf8mb4_unicode_ci,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci,
+  `isGenotype` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=325 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

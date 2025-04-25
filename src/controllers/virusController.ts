@@ -12,8 +12,9 @@ import md5 from "md5";
 import createStatement from "../utils/viral_model";
 import ncbi_utils from "../services/ncbi_utils";
 import hashMapFunctions from "../utils/hashMapFunctions";
-import { getRefseqs, getSubtypes } from "../utils/getSubtypes";
+import { getRefseqs, getSubtypes, getTaxonomyFromApi } from "../utils/getSubtypes";
 import { log } from "../utils/helpers";
+import knexfile from "../../knexfile";
 
 type countSequences = {
 	sequences_length: number;
@@ -121,15 +122,8 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 	const db = knexLocal({
 		client: "mysql2",
 		connection: {
-			host: process.env.DB_HOST_CONTEXT_VSDBM as string,
-			user: process.env.DB_USER_CONTEXT_VSDBM as string,
-			password: process.env.DB_PASSWORD_CONTEXT_VSDBM as string,
+			...knexfile.production.connection,
 			database: virus.database_name,
-			multipleStatements: true,
-		},
-		pool: {
-			min: 1,
-			max: 1,
 		},
 	});
 	const [feature, existingSubtypes] = await Promise.all([
@@ -174,7 +168,7 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 				continue;
 			}
 			try {
-				const id = await acquireAndSaveSequence(accession, db);
+				const id = await acquireAndSaveSequence(accession, db, virus);
 				if (!id) continue;
 				sequenceIds.push(id);
 			} catch (error) {
@@ -201,12 +195,15 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 export const create = async (req: Request, res: Response) => {
 	const response = req.body;
 	log(`[create virus] - ${response}`);
-	const organism_name = (await tryToGetOrganismName(response.organism_refseq.trim())) as string;
+	const organism_data = await tryToGetOrganismInfos(response.organism_refseq.trim());
 
 	const data = {
 		user_name: response.user_name || "",
 		user_email: response.user_email || "",
-		organism_name: organism_name.toLowerCase() !== "no items found" ? organism_name : response.organism_name,
+		organism_name:
+			organism_data?.name.toLowerCase() !== "no items found" ? organism_data?.name : response.organism_name,
+		organism_taxonomy_id: organism_data?.taxonomyId || null,
+		organism_taxonomy: organism_data?.taxonomy || "",
 		organism_refseq: response.organism_refseq.trim() || "",
 		organism_subtypes: Array.isArray(response.organism_subtypes) ? response.organism_subtypes : [],
 	};
@@ -225,20 +222,20 @@ export const create = async (req: Request, res: Response) => {
 		const virus_model = {
 			name: data.organism_name,
 			reference_accession: data.organism_refseq,
+			...(data.organism_taxonomy_id && { taxonomy_id: data.organism_taxonomy_id }),
+			...(data.organism_taxonomy && { taxonomy: data.organism_taxonomy }),
 			database_name: db_name,
 		};
 		await knex("virus").insert(virus_model);
+		const virus = await knex("virus").where("database_name", db_name).first();
 		// now we should instantiate the database
 		await createStatement(db_name);
 		// lets populate the virus db with the references/subtypes sequences
 		const knex_virus = knexLocal({
 			client: "mysql2",
 			connection: {
-				host: process.env.DB_HOST_CONTEXT_VSDBM as string,
-				user: process.env.DB_USER_CONTEXT_VSDBM as string,
-				password: process.env.DB_PASSWORD_CONTEXT_VSDBM as string,
+				...knexfile.production.connection,
 				database: db_name,
-				multipleStatements: true,
 			},
 			pool: {
 				min: 1,
@@ -247,7 +244,7 @@ export const create = async (req: Request, res: Response) => {
 		});
 		// download the reference sequence and after it the subtypes sequences
 		res.send({ status: "success", data: { message: "Virus database created successfully." } });
-		await acquireAndSaveSequence(data.organism_refseq, knex_virus);
+		await acquireAndSaveSequence(data.organism_refseq, knex_virus, virus);
 		await verifySubtypes(virus_model);
 		await knex_virus.destroy();
 	}
@@ -265,12 +262,20 @@ export const verifyCreateData = async (_: Response, data: any, organism_name: st
 	return true;
 };
 
-export const tryToGetOrganismName = async (refseq: string) => {
+export const tryToGetOrganismInfos = async (refseq: string) => {
 	try {
 		const new_refseq = refseq.includes(".") ? refseq.split(".")[0] : refseq;
 		const html = (await axios.get(`https://www.ncbi.nlm.nih.gov/nuccore/${new_refseq}`))?.data;
 		const dom = new JSDOM(html);
-		return dom.window.document.title.split(" - Nucleotide")[0];
+		const name = dom.window.document.querySelector(".rprtheader>h1")?.textContent?.trim();
+		const taxonomyId = html.match(/ORGANISM=(\d+)/)?.[1] || null;
+		const taxonomyData: Record<string, { name?: string; taxonomy?: string }> = await getTaxonomyFromApi([taxonomyId]);
+		const taxonomyInfos = taxonomyData[taxonomyId];
+		return {
+			taxonomyId,
+			...(taxonomyInfos || { taxonomy: null }),
+			name: taxonomyInfos.name || name || dom.window.document.title.split(" - Nucleotide")[0],
+		};
 	} catch (error) {
 		console.error(error);
 	}
@@ -279,6 +284,7 @@ export const tryToGetOrganismName = async (refseq: string) => {
 export const acquireAndSaveSequence = async (
 	accession_version: string,
 	knex_virus?: typeof knex,
+	virus: IVirus | Omit<IVirus, "id"> = {} as IVirus,
 	retries = 0
 ): Promise<number | undefined> => {
 	try {
@@ -289,7 +295,27 @@ export const acquireAndSaveSequence = async (
 		if (!sequence_parsed) throw new Error(`Sequence not found for accession ${accession_version}`);
 		const sequence = { ...sequence_parsed };
 		if ("features" in sequence) delete sequence.features;
-
+		if (
+			sequence.taxonomy?.toLowerCase().includes("unclassified") ||
+			sequence.taxonomy?.toLowerCase().includes("artificial sequence")
+		) {
+			throw new Error(
+				`Unclassified/artificial sequence for accession [${sequence.accession_version}]: ${virus.taxonomy} - ${sequence_parsed.taxonomy}`
+			);
+		}
+		if (!sequence?.taxonomy || sequence?.taxonomy?.split(";")?.length < 7) {
+			throw new Error(
+				`Taxonomy classification too short for accession [${sequence.accession_version}]: ${virus.taxonomy} - ${sequence_parsed.taxonomy}`
+			);
+		}
+		if (virus.taxonomy && sequence.taxonomy) {
+			const contains = sequence_parsed.taxonomy?.includes(virus.taxonomy);
+			const isContained = virus.taxonomy?.includes(sequence.taxonomy);
+			if (!contains && !isContained)
+				throw new Error(
+					`Taxonomy mismatch for accession [${sequence_parsed.accession_version}]: ${virus.taxonomy} - ${sequence_parsed.taxonomy}`
+				);
+		}
 		//first save the sequence itself and then get the id
 		const exists = await db("sequence").select("id").where("accession_version", sequence.accession_version).first();
 		if (exists?.id) return exists.id;
@@ -312,7 +338,7 @@ export const acquireAndSaveSequence = async (
 	} catch (error) {
 		if (retries < 5) {
 			await new Promise((resolve) => setTimeout(resolve, 200));
-			return acquireAndSaveSequence(accession_version, knex_virus, retries + 1);
+			return acquireAndSaveSequence(accession_version, knex_virus, virus, retries + 1);
 		}
 		console.error((error as Error).message);
 	}
@@ -404,7 +430,7 @@ const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries
 
 export const downloadViralSequenceDatabase = async (virus: IVirus) => {
 	try {
-		// await verifySubtypes(virus);
+		await verifySubtypes(virus);
 		log("Downloading organism info...", virus.name);
 		const ncbi_gis = await ncbi_utils.getGiListFromOrganismName(virus.name);
 		// const ncbi_gis = await ncbi_utils.getGiList(virus.name);
@@ -449,7 +475,7 @@ export default {
 	create,
 	deleteVirus,
 	verifyCreateData,
-	tryToGetOrganismName,
+	tryToGetOrganismName: tryToGetOrganismInfos,
 	acquireAndSaveSequence,
 	downloadViralSequenceDatabase,
 	cleanUpDuplicateGis,

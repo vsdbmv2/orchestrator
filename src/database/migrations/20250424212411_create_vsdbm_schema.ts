@@ -13,6 +13,8 @@ export async function up(knex: Knex): Promise<void> {
 		table.increments("id").primary();
 		table.string("name", 500).notNullable();
 		table.string("reference_accession", 100).notNullable();
+		table.integer("taxonomy_id");
+		table.string("taxonomy", 250);
 		table.string("database_name", 100).notNullable();
 		table.dateTime("lastest_update").notNullable().defaultTo(knex.fn.now());
 		table.dateTime("created_at").notNullable().defaultTo(knex.fn.now());

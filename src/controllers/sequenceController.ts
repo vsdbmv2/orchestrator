@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 import knex from "../services/database";
 import taskManager from "../utils/taskManager";
 import { hasReachedMaxMemory, log } from "../utils/helpers";
+import { acquireAndSaveSequence } from "./virusController";
+
+import knexLocal from "knex";
+import knexfile from "../../knexfile";
 
 dotenv.config();
 
@@ -49,12 +53,31 @@ const scheduleLocalMappingWorks = async (virus: IVirus) => {
 const scheduleGlobalMappingWorks = async (virus: IVirus) => {
 	if (hasReachedMaxMemory()) return log(`global alignment not scheduled for ${virus.name} due to memory available`);
 	log("scheduling global alignment mapping", virus.name);
-	const refSeq = await knex
+	let refSeq = await knex
 		.withSchema(virus.database_name)
 		.table("sequence")
 		.where({ accession_version: virus.reference_accession })
 		.first();
-
+	if (!refSeq) {
+		const knex_virus = knexLocal({
+			client: "mysql2",
+			connection: {
+				...knexfile.production.connection,
+				database: virus.database_name,
+			},
+			pool: {
+				min: 1,
+				max: 1,
+			},
+		});
+		await acquireAndSaveSequence(virus.reference_accession, knex_virus, virus);
+		await knex_virus.destroy();
+		refSeq = await knex
+			.withSchema(virus.database_name)
+			.table("sequence")
+			.where({ accession_version: virus.reference_accession })
+			.first();
+	}
 	const alignSequences: idSequenceArray = await knex
 		.withSchema(virus.database_name)
 		.table("sequence")

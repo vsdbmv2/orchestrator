@@ -1,6 +1,8 @@
 export interface IVirus {
 	id: number;
 	name: string;
+	taxonomy: string;
+	taxonomy_id: number;
 	reference_accession: string;
 	database_name: string;
 	latest_update?: string;

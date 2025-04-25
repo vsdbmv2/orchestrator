@@ -1,0 +1,1142 @@
+type: collection.insomnia.rest/5.0
+name: vsdbmv2
+meta:
+  id: wrk_28d62f0600174bebad60e121c3fba0b0
+  created: 1742430901199
+  modified: 1742430901199
+collection:
+  - name: User
+    meta:
+      id: fld_e0f7d5b43b2b4aef9da8fff535871521
+      created: 1590187481700
+      modified: 1590187481700
+      sortKey: -1590187481700
+    children:
+      - url: "{{ _.localhost }}/user/"
+        name: Create User
+        meta:
+          id: req_d2a2c437e59c4f3ba224c1b0d4103272
+          created: 1590187491267
+          modified: 1704939184715
+          isPrivate: false
+          sortKey: -1590188847718
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name":"Helton Fábio",
+            	"email":"heltonfabio@outlook.com",
+            	"password":"123456"
+            	
+            }
+        headers:
+          - id: pair_c19d3e6ea207406fad22055bc00f7d77
+            name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/user/"
+        name: Update User
+        meta:
+          id: req_3876c15fc1d04f3eb1e4030d5c0a82b5
+          created: 1590188059223
+          modified: 1590188803712
+          isPrivate: false
+          sortKey: -1590187491317
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name":"Irahe Kasprzykowski"
+
+            }
+        headers:
+          - id: pair_9fde0523b9be42e392a84f54f195c1be
+            name: Content-Type
+            value: application/json
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/user/"
+        name: Get users
+        meta:
+          id: req_60045cda30874a87b41ab537d3fd705a
+          created: 1590188847668
+          modified: 1704942416440
+          isPrivate: false
+          sortKey: -1590188847668
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/user/2"
+        name: Delete User
+        meta:
+          id: req_b7a5d234b1464820a94671184ffd57d4
+          created: 1590188888814
+          modified: 1590188927648
+          isPrivate: false
+          sortKey: -1590187491267
+        method: DELETE
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Virus
+    meta:
+      id: fld_42c431acbc11421e89b7447c8fb00b4a
+      created: 1590187883795
+      modified: 1590187883795
+      sortKey: -1590187883795
+    children:
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus
+        meta:
+          id: req_a4f2c69eb343446d8c7d56465649c655
+          created: 1589921770156
+          modified: 1745598756420
+          isPrivate: false
+          sortKey: -1588097787039.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "Hepatitis C virus genotype 1, complete genome",
+            	"organism_refseq": "NC_004102.1",
+            	"organism_subtypes": [
+            		{
+              		"label": "1a",
+            			"refseq":	["M62321.1", "M67463.1"]
+              	},
+            		{
+              		"label": "1b",
+            			"refseq":	["D90208.1", "M58335.1"]
+              	},
+            		{
+              		"label": "1c",
+               		"refseq":	["D14853.1", "AY051292.1"]
+              	},
+            		{
+              		"label": "2a",
+               		"refseq":	["D00944.1", "AB047639.1"]
+              	},
+            		{
+              		"label": "2b",
+               		"refseq":	["D10988.1", "AB030907.1"]
+              	},
+            		{
+              		"label": "2c",
+               		"refseq":	"D50409.1"
+              	},
+            		{
+              		"label": "2k",
+               		"refseq":	"AB031663.1"
+              	},
+            		{
+              		"label": "3a",
+               		"refseq":	["D17763.1", "D28917.1"]
+            		},
+            		{
+              		"label": "3b",
+               		"refseq":	"D49374.1"
+              	},
+            		{
+              		"label": "3k",
+               		"refseq":	"D63821.1"
+              	},
+            		{
+              		"label": "4a",
+               		"refseq":	"Y11604.1"
+              	},
+            		{
+              		"label": "5a",
+               		"refseq":	["Y13184.1", "AF064490.1"]
+            		},
+            		{
+              		"label": "6a",
+               		"refseq":	["Y12083.1", "AY858526.2"]
+              	},
+            		{
+              		"label": "6b",
+               		"refseq":	"D84262.2"
+            		},
+            		{
+              		"label": "6d",
+               		"refseq":	"D84263.2"
+              	},
+            		{
+              		"label": "6g",
+               		"refseq":	"D63822.1"
+              	},
+            		{
+              		"label": "6h",
+               		"refseq":	"D84265.2"
+              	},
+            		{
+              		"label": "6k",
+               		"refseq":	"D84264.2"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: Bearer {{ _.op_token }}
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus - covid
+        meta:
+          id: req_3292d10b43da4ef79900319829a7d4ec
+          created: 1590026918486
+          modified: 1705107194885
+          isPrivate: false
+          sortKey: -1588097787089.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "SARS-CoV-2",
+            	"organism_refseq": "NC_045512.2",
+            	"organism_subtypes": [
+            		{
+              		"label": "Unique",
+            			"refseq":	"NC_045512.2"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.op_token }}"
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus-cleanup"
+        name: cleanup
+        meta:
+          id: req_62d6540424584bc69ccf70d2c061535d
+          created: 1705099832079
+          modified: 1705100029478
+          isPrivate: false
+          sortKey: -1588097787189.5
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus - zkv
+        meta:
+          id: req_a716fc6a3a9f4656b920b05acee41710
+          created: 1742430977645
+          modified: 1742433336423
+          isPrivate: false
+          sortKey: -1588097787139.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "Zika Virus",
+            	"organism_refseq": "MH763833.1",
+            	"organism_subtypes": [
+            		{
+              		"label": "Unique",
+            			"refseq":	"MH763833.1"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.op_token }}"
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus - dengue
+        meta:
+          id: req_19341033b7c442ec9c1b6977ef2b7524
+          created: 1742433683233
+          modified: 1742434212953
+          isPrivate: false
+          sortKey: -1588097787164.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "Dengue",
+            	"organism_refseq": "NC_001477.1",
+            	"organism_subtypes": [
+            		{
+              		"label": "Unique",
+            			"refseq":	"NC_001477.1"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.op_token }}"
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus - yellow fever
+        meta:
+          id: req_eab1e6a38d1a41aebd0d61697484ded8
+          created: 1742434133100
+          modified: 1742615340713
+          isPrivate: false
+          sortKey: -1588097787177
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "Yellow fever",
+            	"organism_refseq": "NC_002031.1",
+            	"organism_subtypes": [
+            		{
+              		"label": "Unique",
+            			"refseq":	"NC_002031.1"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.op_token }}"
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus - chikungunya
+        meta:
+          id: req_6bd33cb8e2e54c5da82172696a835b41
+          created: 1742434600910
+          modified: 1742434600910
+          isPrivate: false
+          sortKey: -1588097787170.75
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "Chikungunya",
+            	"organism_refseq": "PV159339.1",
+            	"organism_subtypes": [
+            		{
+              		"label": "Unique",
+            			"refseq":	"PV159339.1"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.op_token }}"
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ localhost  }}/virus/"
+        name: Create virus - west nilo
+        meta:
+          id: req_a89724f4c6934ce597ae417874a8555b
+          created: 1742439637675
+          modified: 1742439678480
+          isPrivate: false
+          sortKey: -1588097787183.25
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user_name": "Helton Fábio",
+            	"user_email": "heltonfabio@outlook.com",
+            	"organism_name": "West Nilo",
+            	"organism_refseq": "NC_001563.2",
+            	"organism_subtypes": [
+            		{
+              		"label": "Unique",
+            			"refseq":	"NC_001563.2"
+              	}
+            	]
+            }
+        headers:
+          - id: pair_a495729f1df240808a24565ddb41b003
+            name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{{ _.op_token }}"
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://api.ncbi.nlm.nih.gov/datasets/v2alpha/virus
+        name: New Request
+        meta:
+          id: req_c4abd29169984e9c862dc0ea52302d47
+          created: 1745545460135
+          modified: 1745546085526
+          isPrivate: false
+          sortKey: -1745545460135
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "taxon": 41856,
+              "refseq_only": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_6e5cc4483d7f45ec9d0f272f7b25f09b
+          - id: pair_5f6c76f841974d65ae3144942e7f516f
+            name: api-key
+            value: 3d2084a0178ff963c6eb5b169ba943536808
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: FrontEnd
+    meta:
+      id: fld_d2093862f55541099991306e1849f69f
+      created: 1590252859791
+      modified: 1590252859791
+      sortKey: -1590252859791
+    children:
+      - url: "{{ localhost  }}/virus/"
+        name: Virus List
+        meta:
+          id: req_ed79b12fcb104a519b235f37b5f1fa20
+          created: 1590285611217
+          modified: 1590285624665
+          isPrivate: false
+          sortKey: -1590285611217
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/sequence/count/1"
+        name: Sequence Count
+        meta:
+          id: req_d80a1a29726e4faf8af46b276c93646d
+          created: 1590286803834
+          modified: 1590289653404
+          isPrivate: false
+          sortKey: -1590286803834
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/epitope/count/1"
+        name: Epitope Count
+        meta:
+          id: req_315111b074f04239ac9350cc26b8b5ff
+          created: 1590287336260
+          modified: 1590289775472
+          isPrivate: false
+          sortKey: -1590286207525.5
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/sequence/translation/count/1"
+        name: Sequence Translation Count
+        meta:
+          id: req_811a28a5f69946d88789758b3b1efb9f
+          created: 1590287428173
+          modified: 1590289639335
+          isPrivate: false
+          sortKey: -1590286505679.75
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/sequence/count/day/1"
+        name: Sequence Count Per Day
+        meta:
+          id: req_542a847336a44c909a0b377bb2610d66
+          created: 1590288082276
+          modified: 1590289676238
+          isPrivate: false
+          sortKey: -1590286654756.875
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/sequence/count/country/1"
+        name: Sequence Count Per Country
+        meta:
+          id: req_137adf51ab1e428db4ec612510148d7f
+          created: 1590288519251
+          modified: 1590289719866
+          isPrivate: false
+          sortKey: -1590286580218.3125
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/sequence/coverage/avg/1"
+        name: Sequence Coverage AVG
+        meta:
+          id: req_329fb29b12d94e578f7f8d8d4f2d3bac
+          created: 1590288992627
+          modified: 1590289661668
+          isPrivate: false
+          sortKey: -1590286729295.4375
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/epitope/iedb/count/"
+        name: IEDB Epitope Count
+        meta:
+          id: req_1932b6f36ef642b1bc3b596523712bd5
+          created: 1590289808068
+          modified: 1590289822694
+          isPrivate: false
+          sortKey: -1590285909371.25
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/epitope/iedb/assay/count/"
+        name: IEDB Assay Count
+        meta:
+          id: req_1443195903aa47fdad2b05f3cc2a51ab
+          created: 1590290214491
+          modified: 1590290221968
+          isPrivate: false
+          sortKey: -1590285760294.125
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Epitopes
+    meta:
+      id: fld_67d72813b226434e8e017aabcbf83a91
+      created: 1590290777681
+      modified: 1590290777681
+      sortKey: -1590290777681
+    children:
+      - url: "{{ serverURL }}/epitope_assay/"
+        name: Epitope assay
+        meta:
+          id: req_2f10c1d9448d40c8841c410c0905ff11
+          created: 1590215394970
+          modified: 1590291159079
+          isPrivate: false
+          sortKey: -1590264686717
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+            	"epitope_id": [1000, 7121, 120150, 17524, 1850700, 1850701, 1850698, 1850699]
+            }
+        headers:
+          - id: pair_eda44e3e746f49268952fc8f9a621cc8
+            name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL  }}/epitope_assay/"
+        name: Epitope Array
+        meta:
+          id: req_153a197b18e84cf1b44120a6ca2e92ee
+          created: 1590252869646
+          modified: 1590291197343
+          isPrivate: false
+          sortKey: -1590264686767
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"epitope_id":"1000"
+            }
+        headers:
+          - id: pair_146cd5a7be0e4820acf2dcb09bffc8e9
+            name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/epitopes/"
+        name: Get epitopes list
+        meta:
+          id: req_eecf9d472dad45ddb42ab879d20abf63
+          created: 1590264686617
+          modified: 1590290919877
+          isPrivate: false
+          sortKey: -1590264686617
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"database_name": "179624320d0e1ccb03450508e3ae5f30"
+            }
+        headers:
+          - id: pair_99b1ad2bc1f0406489a370c827b8d181
+            name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/epitope_by_linearsequence/"
+        name: Get epitope by linearsequence
+        meta:
+          id: req_764b09af7ad84cc4ba1885f3dc025120
+          created: 1590265696278
+          modified: 1590291181997
+          isPrivate: false
+          sortKey: -1590264686667
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"database_name": "179624320d0e1ccb03450508e3ae5f30",
+            	"linearsequence": "TTIQTIVE"
+            }
+        headers:
+          - id: pair_99b1ad2bc1f0406489a370c827b8d181
+            name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ serverURL }}/epitope/assay/top/1"
+        name: Get Top Epitopes With Assay
+        meta:
+          id: req_07b4507549384e03979a4b95e88d4564
+          created: 1590330723924
+          modified: 1590352701662
+          isPrivate: false
+          sortKey: -1590330723925
+        method: GET
+        authentication:
+          token: "{{ op_token  }}"
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: ncbi
+    meta:
+      id: fld_00f6604e1a4b45cf8540e52b082ef39c
+      created: 1705095739492
+      modified: 1705095739492
+      sortKey: -1705095739492
+    children:
+      - url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi
+        name: eSearch - gi list
+        meta:
+          id: req_b1037828f4ec4e4ea9f11579fc795f1f
+          created: 1705095745771
+          modified: 1705134605639
+          isPrivate: false
+          sortKey: -1705095745771
+        method: GET
+        parameters:
+          - id: pair_6b9f9d3e76b5470bb46e3651f5504194
+            name: db
+            value: nuccore
+          - id: pair_ddef84b382d94466b227a28e70a4a524
+            name: term
+            value: Severe acute respiratory syndrome coronavirus 2
+          - id: pair_e53833e25bfc4bc9b1a14d72dc2b2096
+            name: retmode
+            value: json
+          - id: pair_408fb8d40ef14692987201639e05126d
+            name: field
+            value: Organism
+          - id: pair_26d549697245487fbc5fa9f4bc5515aa
+            name: api_key
+            value: c67273a8ca0cbb14195d23f722d6fef49908
+          - id: pair_c4efbd95c95e44ada9fe488bc1d83697
+            name: retmax
+            value: "100000"
+            disabled: false
+          - id: pair_7e71092c164a4a4fa0c14ade200af0e2
+            name: retstart
+            value: "0"
+        headers:
+          - name: User-Agent
+            value: insomnia/8.5.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi
+        name: eFetch - sequence
+        meta:
+          id: req_e42ff9ec0dc24e658758ebaaf12505e2
+          created: 1705096814299
+          modified: 1705110827139
+          isPrivate: false
+          sortKey: -1705096814299
+        method: GET
+        parameters:
+          - id: pair_5793b85307e1481da8325d5f8817f330
+            name: apiKey
+            value: c67273a8ca0cbb14195d23f722d6fef49908
+          - id: pair_f9a258bde33b420fb90051c94ef63b6b
+            name: db
+            value: nuccore
+          - id: pair_8fcd90b8a5734eb68902c97ca534c952
+            name: rettype
+            value: gbc
+          - id: pair_7a356df906354ba3928d8102bb1ee609
+            name: retmode
+            value: json
+          - id: pair_5006c9017f3248c7a0280dac35a297ad
+            name: id
+            value: "156713240"
+        headers:
+          - name: User-Agent
+            value: insomnia/8.5.1
+            id: pair_8870ebd017d1415dbf49176c1e38e4c6
+          - id: pair_b67c420df0154bfda00075832ee74604
+            name: content-type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/taxon/41856/dataset_report
+        name: refseqs - genome/assembly
+        meta:
+          id: req_3b822ff7e35344f4a77fb0aac378bee1
+          created: 1705109609954
+          modified: 1705132117953
+          isPrivate: false
+          sortKey: -1705109609954
+        method: GET
+        parameters:
+          - id: pair_381ddac002394e69b0f74213dab2ea84
+            name: filters.assembly_level
+            value: chromosome
+            disabled: true
+          - id: pair_9c01fdf020f74758b0e335964f62e27c
+            name: table_fields
+            value: assminfo-accession
+            disabled: true
+          - id: pair_16b28ad40ba14ce182a3ff6d3c5de19f
+            name: table_fields
+            value: assminfo-name
+            disabled: true
+          - id: pair_a3e00c4ae80e4d30bdb53070a7124924
+            name: page_size
+            value: "10000"
+          - id: pair_0de5dc8aaaa74e5db2afdb57c6c708d5
+            name: filter.refseq_only
+            value: "true"
+            disabled: true
+          - id: pair_df0b110f468c4054b02e3c64feae4284
+            name: filter.annotated_only
+            value: "true"
+            disabled: true
+          - id: pair_2b1690b242fa4cd6b10125e2c5448f72
+            name: filters.assembly_source
+            value: refseq
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/8.5.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://api.ncbi.nlm.nih.gov/datasets/v2alpha/virus/taxon/31647/dataset_report
+        name: refseqs - accession
+        meta:
+          id: req_ea2def8656b84f0cae74eb45a7049d0e
+          created: 1705117929507
+          modified: 1705132128289
+          isPrivate: false
+          sortKey: -1705103212126.5
+        method: GET
+        parameters:
+          - id: pair_381ddac002394e69b0f74213dab2ea84
+            name: filters.assembly_level
+            value: chromosome
+            disabled: true
+          - id: pair_9c01fdf020f74758b0e335964f62e27c
+            name: table_fields
+            value: assminfo-accession
+            disabled: true
+          - id: pair_16b28ad40ba14ce182a3ff6d3c5de19f
+            name: table_fields
+            value: assminfo-name
+            disabled: true
+          - id: pair_a3e00c4ae80e4d30bdb53070a7124924
+            name: page_size
+            value: "10000"
+            disabled: true
+          - id: pair_0de5dc8aaaa74e5db2afdb57c6c708d5
+            name: filter.refseq_only
+            value: "true"
+            disabled: true
+          - id: pair_df0b110f468c4054b02e3c64feae4284
+            name: filter.annotated_only
+            value: "true"
+            disabled: true
+          - id: pair_2b1690b242fa4cd6b10125e2c5448f72
+            name: filters.assembly_source
+            value: refseq
+            disabled: true
+          - id: pair_a5d1b2dc12f44c169f337a777d442d3e
+            name: returned_content
+            value: ACCESSIONS_ONLY
+          - id: pair_154e6e265ea14926bad607f521187e0b
+            name: table_fields
+            value: accession
+          - id: pair_e7b5e89197c14892ac5d245c9ea2630d
+            name: table_fields
+            value: is-annotated
+          - id: pair_97ebc544a16f41489994503395561732
+            name: table_fields
+            value: is-complete
+          - id: pair_e06fc6ae18354143ac4eeedb5b390644
+        headers:
+          - name: User-Agent
+            value: insomnia/8.5.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/annotation_report
+        name: annotation report
+        meta:
+          id: req_0dd21c740bcd4930babcf1e3058dc5d0
+          created: 1705175922415
+          modified: 1705176020873
+          isPrivate: false
+          sortKey: -1705175922415
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "accession": "NC_004102.1",
+              "search_text": [
+                "string"
+              ],
+              "include_annotation_type": [
+                "GENOME_FASTA",
+            		"RNA_FASTA"
+              ],
+              "table_format": "NO_TABLE"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/8.5.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: "{{ localhost  }}/login/"
+    name: Login
+    meta:
+      id: req_d8dcc47a7a6c4b8286f1bae9d899d6e3
+      created: 1590187873227
+      modified: 1745605516392
+      isPrivate: false
+      sortKey: -1590054625928
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email":"heltonfabio@outlook.com",
+        	"password":"123456"
+        }
+    headers:
+      - id: pair_a8436796f33f470380b019129cebb6f1
+        name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_08642d118bb84283bafd0880dcb82556
+    created: 1589921758503
+    modified: 1705175475055
+  cookies:
+    - key: ncbi_sid
+      value: FED62DA8CE41F226_983ASID
+      domain: nih.gov
+      path: /
+      hostOnly: false
+      creation: 2024-01-12T21:44:34.024Z
+      lastAccessed: 2024-01-13T19:51:15.051Z
+      id: 30863e7a-51d0-401c-aed5-3e2b7eba88d9
+environments:
+  name: Base Environment
+  meta:
+    id: env_cb2af3a0a007408786de3ba9f1b85786
+    created: 1589921758499
+    modified: 1745533158775
+    isPrivate: false
+  data:
+    localhost: http://localhost:4242
+    serverURL: https://saga.bahia.fiocruz.br/api
+    op_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoiSGVsdG9uIEbDoWJpbyIsImVtYWlsIjoiaGVsdG9uZmFiaW9Ab3V0bG9vay5jb20iLCJwYXNzd29yZCI6ImVjYzIyNzhjNjEyY2U2ZDgwOTAzNzEzMjA0MDc0NzllOTQ1MzdlMmEiLCJjb250ZXh0Ijoib3AiLCJjcmVhdGVkX2F0IjoiMjAyNS0wNC0yNVQwMToxMToxNS4wMDBaIn0sImlhdCI6MTc0NTUzMzEyNX0.XCbk_XxxQWtmRK4impFhdr52vbqonOM5_g7GOhZkVH4
+  subEnvironments:
+    - name: New Environment
+      meta:
+        id: env_5cbe7acd580241738e3be06b28ce723e
+        created: 1745533109062
+        modified: 1745533109062
+        isPrivate: false
+        sortKey: 1745533109062

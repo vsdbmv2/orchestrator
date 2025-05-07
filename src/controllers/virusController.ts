@@ -118,7 +118,7 @@ export const cleanUpDuplicateSubtypeMap = async (req: Request, res: Response) =>
 	res.send({ status: "success" });
 };
 
-export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
+export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">, type: "genotype" | "subtype" = "genotype") => {
 	const db = knexLocal({
 		client: "mysql2",
 		connection: {
@@ -133,7 +133,10 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 			.andWhere("value", "like", "taxon:%")
 			.select("*")
 			.first(),
-		db.table("subtype").select(),
+		db
+			.table("subtype")
+			.where("isGenotype", "=", type === "genotype")
+			.select(),
 	]);
 	const taxon = feature?.value;
 	if (!taxon) throw new Error("sequence without gi");
@@ -143,7 +146,8 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 		Object.values(subtypes)
 			.flat()
 			.map(({ taxonomy_id }) => taxonomy_id)
-			.filter(Boolean) as string[]
+			.filter(Boolean) as string[],
+		type === "genotype"
 	);
 	const newSubtypes = Object.values(subtypes)
 		.map(
@@ -158,7 +162,12 @@ export const verifySubtypes = async (virus: IVirus | Omit<IVirus, "id">) => {
 		let idsubtype = existingSubtypes.find((subtype) => subtype.description.toLowerCase() === name.toLowerCase())?.id;
 		if (!idsubtype) {
 			isNew = true;
-			idsubtype = (await db.table("subtype").insert({ description: name }))[0];
+			idsubtype = (
+				await db.table("subtype").insert({
+					description: name,
+					isGenotype: type === "genotype",
+				})
+			)[0];
 		}
 		const sequenceIds = [];
 		for (const accession of accessions) {
@@ -430,7 +439,9 @@ const downloadAndStoreSingleSequence = async (virus: IVirus, gi: string, retries
 
 export const downloadViralSequenceDatabase = async (virus: IVirus) => {
 	try {
-		await verifySubtypes(virus);
+		await verifySubtypes(virus, "genotype");
+		await verifySubtypes(virus, "subtype");
+		return;
 		log("Downloading organism info...", virus.name);
 		const ncbi_gis = await ncbi_utils.getGiListFromOrganismName(virus.name);
 		// const ncbi_gis = await ncbi_utils.getGiList(virus.name);

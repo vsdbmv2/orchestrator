@@ -17,6 +17,181 @@ export const getPage = async (ncbi_id: number | string) => {
 	const data = await fetch(`${baseURL}/Taxonomy/Browser/wwwtax.cgi?id=${ncbi_id}`).then((value) => value.text());
 	return new JSDOM(data).window.document;
 };
+
+export const scrapeTaxonomyPage2 = async (document: Document) => {
+	// In a real implementation, we would fetch the page here
+	// For demonstration, we'll assume we're already on the relevant page
+
+	// Extract the scientific name
+	const scientificName = document.querySelector("h1")?.textContent?.trim() || "";
+
+	// Find the children/subtypes table
+	// This requires understanding the specific structure of the NCBI Taxonomy Browser
+	const childrenSection = Array.from(document.querySelectorAll("h2, h3, h4")).find(
+		(header) =>
+			header.textContent?.includes("Direct") ||
+			header.textContent?.includes("Children") ||
+			header.textContent?.includes("Subtypes")
+	);
+
+	let childrenTable = null;
+	if (childrenSection) {
+		// Find the table after this header
+		let currentElement = childrenSection.nextElementSibling;
+		while (currentElement) {
+			if (currentElement.tagName === "TABLE") {
+				childrenTable = currentElement;
+				break;
+			}
+			currentElement = currentElement.nextElementSibling;
+		}
+	}
+
+	// If we couldn't find the table by header, try looking for the table directly
+	// NCBI often has a table with specific characteristics for child taxonomies
+	if (!childrenTable) {
+		const tables = document.querySelectorAll("table");
+		for (const table of tables) {
+			// Look for tables with taxon links and rank information
+			if (
+				table.querySelector('a[href*="id="]') &&
+				(table.textContent?.includes("species") ||
+					table.textContent?.includes("genotype") ||
+					table.textContent?.includes("isolate"))
+			) {
+				childrenTable = table;
+				break;
+			}
+		}
+	}
+
+	// Extract child taxa
+	const children = [];
+	if (childrenTable) {
+		const rows = childrenTable.querySelectorAll("tr");
+
+		for (const row of rows) {
+			// Skip header rows
+			if (row.querySelector("th")) continue;
+
+			// Look for taxonomy links
+			const link = row.querySelector("a[href*=\"id=\"]");
+			if (link) {
+				const href = link.getAttribute("href");
+				const childTaxId = href?.match(/id=(\d+)/)?.[1];
+				let childName = link.textContent?.trim();
+
+				// Sometimes NCBI has additional information in brackets that we may want to clean
+				childName = childName?.replace(/\s+\[.*\]$/, "");
+
+				if (childTaxId && childName) {
+					children.push({
+						name: childName,
+						taxId: childTaxId,
+					});
+				}
+			}
+		}
+	}
+
+	return {
+		name: scientificName,
+		// taxId,
+		children,
+	};
+};
+
+export const scrapeTaxonomyPage = async (document: Document) => {
+	const results = [];
+	// Use the main species Tax ID as requested in the example output format
+
+	// Find the specific species list item using its unique tax ID in the link
+	const speciesListItem = document.querySelector("ul > li > a");
+	if (!speciesListItem) return [];
+	const speciesLiElement = speciesListItem.closest("li");
+	const mainList = speciesLiElement ? speciesLiElement.querySelector(":scope > ul") : null;
+
+	if (!mainList) {
+		console.error("Could not find the main taxonomy list UL element under Hepacivirus hominis.");
+		return [];
+	}
+
+	// Get all direct children LI elements under the main list
+	const topLevelListItems = mainList.querySelectorAll(":scope > li");
+
+	topLevelListItems.forEach((itemLi) => {
+		const topLevelLink = itemLi.querySelector(":scope > a");
+		if (!topLevelLink) return; // Skip if no direct link in the LI
+
+		const topLevelName = topLevelLink.textContent?.trim().replace(/\s+/g, " ");
+		const mainTaxId = topLevelLink.getAttribute("href")?.match(/id=(\d+)/)?.[1] || null;
+
+		const genotypeData = {
+			genotype: topLevelName,
+			taxId: mainTaxId, // Assign the main species ID here
+			subtypes: [],
+		};
+
+		// 1. Find ALL descendant list items marked with type="square" within this top-level LI
+		const subtypeSquareLIs = itemLi.querySelectorAll('li[type="square"]');
+
+		subtypeSquareLIs.forEach((subLi) => {
+			const subLink = subLi.querySelector(":scope > a"); // Get the link directly under the square li
+			if (!subLink) return;
+
+			// Prefer text within a <strong> tag inside the link if it exists
+			const subNameElement = subLink.querySelector("strong") || subLink;
+			const subName = subNameElement.textContent.trim().replace(/\s+/g, " ");
+			const href = subLink.getAttribute("href");
+			let subTaxId = null;
+
+			if (href) {
+				const match = href.match(/id=(\d+)/);
+				if (match && match[1]) {
+					subTaxId = match[1];
+				}
+			}
+
+			if (subName && subTaxId) {
+				// Check for duplicates based on taxId before adding
+				if (!genotypeData.subtypes.some((s) => s.taxId === subTaxId)) {
+					genotypeData.subtypes.push({ name: subName, taxId: subTaxId });
+				}
+			}
+		});
+
+		// 2. Check if the top-level LI itself is a square (a leaf node in this context)
+		if (itemLi.getAttribute("type") === "square") {
+			const href = topLevelLink.getAttribute("href");
+			let specificTaxId = null;
+			if (href) {
+				const match = href.match(/id=(\d+)/);
+				if (match && match[1]) {
+					specificTaxId = match[1];
+				}
+			}
+			if (topLevelName && specificTaxId) {
+				// Add itself as a subtype if it's a square LI directly under the main list
+				// Avoid duplicates if somehow already added (shouldn't happen with this logic)
+				if (!genotypeData.subtypes.some((s) => s.taxId === specificTaxId)) {
+					genotypeData.subtypes.push({
+						name: topLevelName,
+						taxId: specificTaxId,
+					});
+				}
+			}
+		}
+
+		// Add the extracted data for this group to the results array
+		// Only add if it has subtypes or if it was a square node itself
+		if (genotypeData.subtypes.length > 0) {
+			results.push(genotypeData);
+		}
+	});
+
+	return results;
+};
+
 export const getTaxonomyIdFromPage = async (url: string, retries = 0): Promise<string | undefined> => {
 	try {
 		const data = await fetch(url).then((value) => value.text());
@@ -135,9 +310,12 @@ export const getAssemblyGenomeRefseqs = async (
 	});
 	return result;
 };
-export const getRefseqs = async (taxonomy_ids: string[] | number[]): Promise<{ [key: string]: Array<any> }> => {
+export const getRefseqs = async (
+	taxonomy_ids: string[] | number[],
+	isGenotype = true
+): Promise<{ [key: string]: Array<any> }> => {
 	let filters = "/dataset_report?";
-	filters += "filter.refseq_only=true";
+	if (isGenotype) filters += "filter.refseq_only=true";
 	filters += "&filters.exclude_atypical=true";
 	filters += "&filters.assembly_level=complete_genome";
 	filters += "&returned_content=ACCESSIONS_ONLY";
@@ -173,7 +351,8 @@ export const getRefseqs = async (taxonomy_ids: string[] | number[]): Promise<{ [
 
 export const getSubtypes = async (ncbi_id: number | string) => {
 	let document = await getPage(ncbi_id);
-	const strains: strain[] = [];
+	let strains: strain[] = [];
+	const data = await scrapeTaxonomyPage(document);
 	const parentUrl = document.querySelector("a[alt=species]")?.getAttribute("href");
 	if (parentUrl) {
 		const id = new URL(baseURL + parentUrl).searchParams.get("id") as string;
@@ -189,6 +368,10 @@ export const getSubtypes = async (ncbi_id: number | string) => {
 		strains.push({ name, url, ncbi_id: +id, type });
 	});
 	strains.shift(); // remove family
+	const bad = strains.filter((e) => !/(geno|sub)type|strain|recombinant/gi.test(e.name));
+	strains = strains
+		.filter((e) => /(geno|sub)type|strain|recombinant/gi.test(e.name))
+		.sort((a, b) => a.name.localeCompare(b.name));
 	// shall we include isolate/recombinant/unclassified ?
 	// strains = strains.filter((e) => /(geno|sub)type|strain/gi.test(e.name)).sort((a, b) => a.name.localeCompare(b.name));
 	const result: { [key: string]: strain } = {};
